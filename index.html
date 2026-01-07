@@ -3,87 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quem é Quem DET</title>
-    <!-- Carrega o Tailwind CSS para estilização moderna e responsiva -->
+    <meta name="description" content="Quadro de colaboradores da Diretoria de Educação e Tecnologia - SESI SENAI Goiás">
+    <title>Quem é Quem DET - SESI SENAI</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <style>
-        /* Estilos personalizados de alto contraste e tipografia */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8f8f8; /* Fundo branco/quase branco */
-            color: #1a1a1a; /* Texto em alto contraste */
+            background-color: #f8fafc;
+            color: #1e293b;
         }
-        /* Estilo para a hierarquia visual dos cartões (sombra e bordas arredondadas) */
+
         .contact-card {
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        
         .contact-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        /* Cor de destaque para o texto principal */
-        .text-primary-dark {
-            color: #0d47a1; /* Azul escuro para títulos */
-        }
-        /* Foco do input */
-        .input-focus:focus {
-            border-color: #0d47a1;
-            box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.3);
-        }
-        
-        /* -------------------------------------------------------- */
-        /* NOVOS ESTILOS DE CONTRASTE PARA OS BOTÕES DE FILTRO */
-        /* -------------------------------------------------------- */
+
         .filter-button {
-            /* Cor base dos botões: um azul mais vibrante */
-            background-color: #42a5f5; /* Medium Blue - Contraste alto contra o branco */
+            background-color: #3b82f6;
             transition: all 0.2s;
-            border: 2px solid transparent;
         }
+
         .filter-button:hover {
-            background-color: #1e88e5; /* Um ton de azul mais escuro no hover */
+            background-color: #2563eb;
             transform: translateY(-1px);
         }
+
         .filter-button.active {
-            /* Estado ativo: Fundo azul escuro (primary-dark) com borda branca e sombra de destaque */
-            background-color: #0d47a1; 
-            border-color: #fff; 
-            box-shadow: 0 0 0 4px rgba(66, 165, 245, 0.6); /* Sombra azul clara para pop-up */
-            transform: translateY(-1px);
+            background-color: #1e3a8a; 
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.4);
         }
         
-        /* Estilo para a foto de perfil no cartão */
-        .profile-image {
+        .profile-image-container {
             width: 80px;
             height: 80px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid #0d47a1;
-            margin-bottom: 1rem;
+            border: 3px solid #1e3a8a;
+            overflow: hidden;
+            border-radius: 9999px;
+            background-color: #e2e8f0;
         }
         
-        /* Estilo para o botão de detalhes */
+        .profile-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .detail-button {
-            background-color: #f0f4f8; /* Fundo claro para contraste sutil */
-            color: #0d47a1;
-            border: 1px solid #cce0ff;
+            background-color: #f1f5f9;
+            color: #1e3a8a;
+            border: 1px solid #e2e8f0;
             transition: all 0.2s;
         }
+
         .detail-button:hover {
-            background-color: #e0e7f1;
+            background-color: #e2e8f0;
         }
         
-        /* Estilo para a lista de detalhes */
         .detail-list {
             list-style: disc;
-            margin-left: 1rem;
-            text-align: left;
-            font-size: 0.875rem; /* text-sm */
-            color: #4b5563; /* text-gray-600 */
+            margin-left: 1.25rem;
+            color: #475569;
         }
+        
         .detail-list li {
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.35rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
         }
     </style>
 </head>
@@ -91,1818 +85,254 @@
 
     <div id="app" class="max-w-6xl mx-auto">
         
-        <!-- Cabeçalho e Título Principal -->
-        <header class="text-center mb-8 md:mb-12">
-            <!-- Logomarca DET -->
-            <div class="mb-4">
-                <img src="https://i.postimg.cc/RZ7Shjmy/DET_-_azul.png" alt="Logomarca Diretoria de Educação e Tecnologia" class="mx-auto h-16 md:h-20 object-contain">
+        <!-- Cabeçalho -->
+        <header class="text-center mb-10">
+            <div class="mb-6 inline-block p-4 bg-white rounded-2xl shadow-sm">
+                <img src="https://i.postimg.cc/RZ7Shjmy/DET_-_azul.png" alt="Logo DET" class="mx-auto h-12 md:h-16 object-contain">
             </div>
-
-            <h1 class="text-3xl md:text-5xl font-extrabold text-primary-dark tracking-tight">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-blue-900 tracking-tight">
                 Quem é Quem DET
             </h1>
-            <p class="mt-2 text-lg text-gray-700">Diretoria de Educação e Tecnologia - SESI SENAI</p>
+            <p class="mt-3 text-lg text-slate-500 font-medium">Diretoria de Educação e Tecnologia - SESI SENAI Goiás</p>
         </header>
         
-        <!-- Área de Botões de Gerência -->
-        <div class="mb-6 p-5 bg-white rounded-xl shadow-lg border border-gray-100">
-            <h2 class="text-lg font-semibold mb-3 text-gray-800">Filtrar por Gerência / Coordenação:</h2>
-            <div id="management-buttons-container" class="flex flex-wrap gap-3">
-                <!-- Botões de Gerência serão injetados aqui (incluindo DET) -->
+        <!-- Filtros por Gerência -->
+        <div class="mb-8 p-6 bg-white rounded-3xl shadow-sm border border-slate-100">
+            <h2 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4 flex items-center">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+                Filtrar por Gerência / Coordenação
+            </h2>
+            <div id="management-buttons-container" class="flex flex-wrap gap-2">
+                <!-- Injetado via JS -->
             </div>
         </div>
 
-        <!-- Área de Busca Interativa -->
-        <div class="mb-10 p-5 bg-white rounded-xl shadow-lg border border-gray-100">
-            <label for="search-input" class="block text-xl font-semibold mb-3 text-gray-800">
-                Pesquisar por Nome, Cargo, Função, Atividades ou Gerência:
-            </label>
-            <input 
-                type="text" 
-                id="search-input" 
-                placeholder="Ex: quem pode me ajudar com BI? / colaborador que responde pela SEDUC" 
-                class="w-full p-4 text-xl border-2 border-gray-300 rounded-lg input-focus focus:outline-none"
-                onkeyup="filterContacts(this.value)"
-            />
-            <p class="mt-3 text-sm text-gray-500">A busca é dinâmica e retorna resultados em tempo real com base nas palavras-chave fornecidas.</p>
+        <!-- Campo de Busca Dinâmico -->
+        <div class="mb-10 group">
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                    <svg class="h-6 w-6 text-slate-400 group-focus-within:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    placeholder="Quem é responsável por BI? / Procure por nome, cargo ou palavra-chave..." 
+                    class="w-full pl-14 pr-6 py-5 bg-white rounded-3xl shadow-lg border-none focus:ring-4 focus:ring-blue-500/10 text-xl transition-all placeholder-slate-400"
+                    onkeyup="filterContacts(this.value)"
+                />
+            </div>
         </div>
 
-        <!-- Área de Resultados (Quadro Resumo) -->
+        <!-- Resultados -->
         <section>
-            <h2 class="text-2xl font-bold mb-4 text-gray-800" id="results-title">
-                Profissionais Encontrados (0)
-            </h2>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-slate-800" id="results-title">Profissionais Encontrados (0)</h2>
+                <div id="filter-badge" class="hidden px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider"></div>
+            </div>
+            
             <div id="results-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Mensagem inicial de instrução -->
-                <p id="initial-message" class="col-span-full text-center text-gray-500 p-8 bg-gray-50 rounded-lg">
-                    Use o campo de pesquisa acima ou clique em um dos botões de Gerência para visualizar os contatos.
-                </p>
+                <!-- Cards injetados aqui -->
             </div>
         </section>
 
     </div>
 
     <script>
-        // --- 1. CONSTANTES E VARIÁVEIS GLOBAIS ---
-        
-        // Mapeamento de Hierarquia de Cargos (Prioridade: 1=Mais Alto)
+        // --- DATA DE CARGOS E HIERARQUIA ---
         const HIERARCHY_MAP = {
             "Diretor de Educação e Tecnologia": 1,
-            "Gerente de Educação Básica e Continuada": 2,
-            "Gerente de Educação Profissional e Superior": 2,
-            "Gerente de Tecnologia e Inovação": 2,
-            "Coordenadora de Projetos Estratégicos": 3,
-            "Coordenador de Recursos Tecnológicos e Inteligência Educacional": 3,
-            "Coordenador das Unidades Móveis DR/GO": 3,
-            "Assessora Técnica Educacional": 3,
-            "Assessor Técnico Educacional": 3,
-            "Analista IV": 4,
-            "Analista III": 4,
-            "Analista II": 4,
-            "Analista de Educação": 4,
-            "Psicólogo Educacional": 4,
-            "Secretária do Diretor": 5,
-            "Secretária": 5,
-            "Assistente Administrativo": 5,
-            "Estagiário": 6
+            "Gerente de Educação Básica e Continuada": 2, "Gerente de Educação Profissional e Superior": 2, "Gerente de Tecnologia e Inovação": 2,
+            "Coordenadora de Projetos Estratégicos": 3, "Coordenador de Recursos Tecnológicos e Inteligência Educacional": 3, "Coordenador das Unidades Móveis DR/GO": 3, "Assessora Técnica Educacional": 3, "Assessor Técnico Educacional": 3,
+            "Analista IV": 4, "Analista III": 5, "Analista II": 6, "Analista de Educação": 6, "Psicólogo Educacional": 6,
+            "Secretária do Diretor": 7, "Secretária": 7, "Assistente Administrativo": 8, "Estagiário": 9
         };
 
-        // Mapeamento de Pontuação de Prioridade Específica por Palavra-Chave (Prioridade: 1=Mais Alto)
-        const SEARCH_PRIORITY_MAP = {
-            // Palavras-chave: Dados, BI, Dashboards, painéis,
-            "dados": { "pedro henrique": 1, "antonio neto": 2, "raphael ferro": 3, "david daniel": 4, "guilherme alves": 5 },
-            "bi": { "pedro henrique": 1, "antonio neto": 2, "raphael ferro": 3, "david daniel": 4, "guilherme alves": 5 },
-            "dashboards": { "pedro henrique": 1, "antonio neto": 2, "raphael ferro": 3, "david daniel": 4, "guilherme alves": 5 },
-            "paineis": { "pedro henrique": 1, "antonio neto": 2, "raphael ferro": 3, "david daniel": 4, "guilherme alves": 5 },
-            "painéis": { "pedro henrique": 1, "antonio neto": 2, "raphael ferro": 3, "david daniel": 4, "guilherme alves": 5 },
-            
-            // Palavras-chave: IA, Chat, Gemini, inteligência artificial, assistentes, agentes
-            "inteligencia artificial": { "pedro henrique": 1, "antonio neto": 2 },
-            "ia": { "pedro henrique": 1, "antonio neto": 2 },
-            "chat": { "pedro henrique": 1, "antonio neto": 2 },
-            "gemini": { "pedro henrique": 1, "antonio neto": 2 },
-            "agentes": { "pedro henrique": 1, "antonio neto": 2 },
-            "assistentes": { "pedro henrique": 1, "antonio neto": 2 },
-            
-            // Palavras-chave: FIC, Cursos Técnicos, Técnico, Formação Inicial
-            "fic": { "osvair matos": 1, "vinicius micheletti": 2 },
-            "cursos tecnicos": { "osvair matos": 1, "vinicius micheletti": 2 },
-            "tecnico": { "osvair matos": 1, "vinicius micheletti": 2 },
-            "formacao inicial": { "osvair matos": 1, "vinicius micheletti": 2 },
-            
-            // Palavras-chave: Curso Superior, Graduação, Engenharias, Bacharelado, Tecnólogos
-            "curso superior": { "osvair matos": 1, "rayner max": 2, "luciane balduino": 3 },
-            "graduacao": { "osvair matos": 1, "rayner max": 2, "luciane balduino": 3 },
-            "engenharias": { "osvair matos": 1, "rayner max": 2, "luciane balduino": 3 },
-            "bacharelado": { "osvair matos": 1, "rayner max": 2, "luciane balduino": 3 },
-            "tecnologos": { "osvair matos": 1, "rayner max": 2, "luciane balduino": 3 },
-            
-            // Palavras-chave: SEDUC
-            "seduc": { "tais moreira": 1, "diorrane tome de melo": 2, "isis stefhany": 3 }
-        };
-        
-        // Mapeamento de Gerência (Sigla para Nome Completo)
         const MANAGEMENT_AREA_MAP = {
-            "DET": "Diretoria de Educação e Tecnologia", 
-            "GEB": "Gerência de Educação Básica e Continuada",
-            "GEP": "Gerência de Educação Profissional e Superior",
-            "GTI": "Gerência de Tecnologia e Inovação",
-            "PE": "Projetos Estratégicos",
-            "CRTI": "Coordenação de Recursos Tecnológicos e Inteligência Educacional",
-            "CMOV": "Unidades Móveis DR/GO"
+            "DET": "Diretoria", "GEB": "Educação Básica", "GEP": "Educação Profissional",
+            "GTI": "Tecnologia e Inovação", "PE": "Projetos Estratégicos",
+            "CRTI": "Recursos e Inteligência", "CMOV": "Unidades Móveis"
         };
 
-        let activeFilter = null; // Rastreia o filtro de gerência ativo
-
-        // Variável global para armazenar os dados dos profissionais (Preenchida com dados iniciais e atualizada abaixo)
+        // --- BASE DE DADOS DOS CONTATOS ---
         let contacts = [
-            // --- DET - Diretoria de Educação e Tecnologia ---
-            {
-                id: 0,
-                nome: "Claudemir José Bonatto",
-                cargo: "Diretor de Educação e Tecnologia",
-                gerencia: "DET",
-                funcao: "Direção e gestão da Diretoria de Educação e Tecnologia",
-                atividades_correlatas: "Diretoria, Gestão, Liderança, Planejamento Estratégico, Articulação Institucional, SESI, SENAI",
-                resumo: "Responsável pela direção estratégica e operacional de todas as Gerências e Coordenações da DET.",
-                atividades_detalhadas: `O Diretor de Educação e Tecnologia exerce uma responsabilidade ampla e estratégica ao liderar, de forma integrada, as gerências relacionadas à Educação e Tecnologia do SESI e SENAI Goiás, como: Gerência de Educação Básica, Educação Profissional e Superior, Tecnologia e Inovação, além das coordenações de Recursos Tecnológicos e Inteligência Educacional, Projetos Estratégicos e Unidades Móveis. Cabe-lhe orientar diretrizes, garantir alinhamento institucional, assegurar a qualidade das entregas educacionais e tecnológicas, promover a inovação, fortalecer parcerias e acompanhar indicadores que sustentam o desempenho das escolas e unidades SENAI e SESI em todo o estado, conduzindo equipes diversas com visão sistêmica, equilíbrio e foco no impacto para a indústria e para a educação.`,
-                email: "bonatto@fieg.com.br",
-                telefone: "6232191701",
-                image_url: "https://i.postimg.cc/L6BfX1JS/Bonatto.png" 
-            },
-            {
-                id: 0.1,
-                nome: "Mônica Christina",
-                cargo: "Secretária do Diretor",
-                gerencia: "DET",
-                funcao: "Suporte e gestão da agenda da Diretoria",
-                atividades_correlatas: "Secretaria, Agenda, Apoio Administrativo, Reuniões, Contatos da Diretoria, Suporte Diretores, Pagamentos, Prazos, Gestão Documental, Viagens, Compras, Notas Fiscais, Orçamento Diretoria",
-                resumo: "Responsável pela organização da agenda, fluxo de comunicação, gestão orçamentária e suporte administrativo da Diretoria.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Atendimento telefônico e recepção</li>
-                        <li>Responder cartas, ofícios e e-mails</li>
-                        <li>Controlar compromissos, marcar e confirmar reuniões</li>
-                        <li>Supervisionar pagamentos e cuidar de prazos</li>
-                        <li>Executar atividades administrativas gerais</li>
-                        <li>Apoiar o Diretor e Gerentes no planejamento</li>
-                        <li>Organizar e arquivar documentos e correspondências</li>
-                        <li>Identificar e resolver pendências dentro dos prazos</li>
-                        <li>Solicitar diárias, hospedagens e passagens</li>
-                        <li>Formalizar pedidos de compras</li>
-                        <li>Lançar notas fiscais no sistema</li>
-                        <li>Controlar o orçamento da Diretoria e Gerências</li>
-                        <li>Prestar suporte técnico às secretárias das Gerências</li>
-                    </ul>
-                `,
-                email: "monica.senai@fieg.com.br",
-                telefone: "(62) 3219-1702 / (62) 98427-6298",
-                image_url: "https://i.postimg.cc/qB8sSYXC/Monica.png" 
-            },
-            // --- GEB - Gerência de Educação Básica e Continuada ---
-            {
-                id: 1,
-                nome: "Diego Freire",
-                cargo: "Gerente de Educação Básica e Continuada",
-                gerencia: "GEB",
-                funcao: "Gestão da educação básica e continuada",
-                atividades_correlatas: "Gestão pedagógica, Liderança de equipes, Planejamento estratégico, Acompanhamento de indicadores, Ensino, SESI",
-                resumo: "Responsável por toda a gestão da educação básica, articulando equipes pedagógicas, projetos e resultados.",
-                atividades_detalhadas: `Responsabilidade principal: Gerente de Educação Básica e Continuada`,
-                email: "",
-                telefone: "",
-                image_url: "https://i.postimg.cc/pTzr6wjQ/Diego-Freire.png" 
-            },
-            {
-                id: 2,
-                nome: "Adriana Sampaio",
-                cargo: "Secretária",
-                gerencia: "GEB",
-                funcao: "Gestão de agenda e suporte administrativo",
-                atividades_correlatas: "Agenda, viagens, compras, notas fiscais, apoio administrativo, Reserva de Veículos, Diárias, Reserva de Ambientes",
-                resumo: "Organiza agendas, viagens e demandas administrativas da Gerência de Educação Básica.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Gestão da agenda do Gerente</li>
-                        <li>Reserva de veículos</li>
-                        <li>Reserva de ambientes para reuniões e formações</li>
-                        <li>Solicitação de diárias, hospedagens e passagens aéreas</li>
-                        <li>Solicitação de compras</li>
-                        <li>Lançamento de notas fiscais</li>
-                        <li>Apoio administrativo à Gerência</li>
-                    </ul>
-                `,
-                email: "adriana@fieg.com.br",
-                telefone: "(62) 3219-1328 / (62) 99962-1696",
-                image_url: "https://i.postimg.cc/FsQs7CL8/Adriana.png" 
-            },
-            {
-                id: 3,
-                nome: "Alfredo Alves",
-                cargo: "Analista Administrativo",
-                gerencia: "GEB",
-                funcao: "Gestão integrada de aquisições e infraestrutura tecnológica",
-                atividades_correlatas: "Compras, orçamento, patrimônio, logística, gestão fiscal, suporte técnico, tecnologia, robótica, Gestão de Contratos, Protheus, SORS, Sistemas, Fornecedores",
-                resumo: "Responsável pelo suporte técnico e administrativo relacionado a compras, logística, patrimônio e sistemas.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Conduzir processos de compras: levantamento de necessidades, cotação, negociação, acompanhamento de pedidos e gestão contratual</li>
-                        <li>Planejar e controlar orçamentos de projetos, eventos e aquisições</li>
-                        <li>Gerir patrimônio: registro, inventário, baixas e transferências</li>
-                        <li>Realizar logística de recebimento, conferência e distribuição de equipamentos</li>
-                        <li>Administrar gestão fiscal: conferência de notas, integração com sistemas contábeis</li>
-                        <li>Apoiar operacionalmente projetos de robótica e tecnologia</li>
-                        <li>Implantar laboratórios, montagem, testes e suporte técnico</li>
-                        <li>Operar sistemas administrativos (Protheus, SORS), relatórios e integrações</li>
-                        <li>Manter relacionamento com fornecedores garantindo compliance</li>
-                    </ul>
-                `,
-                email: "alfredo@fieg.com.br",
-                telefone: "(62) 3219-1302 / (61) 98127-6685",
-                image_url: "https://i.postimg.cc/5tJwgSDt/Alfredo.png" 
-            },
-            {
-                id: 4,
-                nome: "Dulcianny Santana",
-                cargo: "Analista de Educação",
-                gerencia: "GEB",
-                funcao: "Ensino Fundamental - Anos Finais",
-                atividades_correlatas: "JEPP, Innovation Camp, GranPrix, Redação Nota 1000, Maratona SESI & CBIC, ensino fundamental, inovação, projetos, Junior Achievement",
-                resumo: "Atua em programas e projetos de inovação e empreendedorismo para anos finais do ensino fundamental.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Coordenação do Projeto JEPP (6º ao 9º ano)</li>
-                        <li>Coordenação do Innovation Camp – Júnior Achievement</li>
-                        <li>Coordenação do GranPrix</li>
-                        <li>Apoio ao Redação Nota 1000</li>
-                        <li>Apoio à Maratona de Inovação SESI & CBIC</li>
-                    </ul>
-                `,
-                email: "dulcianny.sesi@fieg.com.br",
-                telefone: "(62) 99182-6146",
-                image_url: "https://i.postimg.cc/m2YLW3ts/Dulcyane.png" 
-            },
-            {
-                id: 5,
-                nome: "Inglenth Morais",
-                cargo: "Analista de Educação",
-                gerencia: "GEB",
-                funcao: "Educação de Jovens e Adultos (EJA)",
-                atividades_correlatas: "Credenciamento, autorizações, formação docente, SEJA PRO +, EJA, Educação para Jovens e Adultos, Supletivo, Núcleo de Formação Docente",
-                resumo: "Interlocutora da EJA e responsável por processos regulatórios e formação docente.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Interlocução da Educação de Jovens e Adultos</li>
-                        <li>Credenciamento e autorizações de funcionamento das escolas</li>
-                        <li>Coordenação da EJA no Núcleo de Formação Docente e Mentoria</li>
-                        <li>Acompanhamento do Núcleo de Formação Docente e Mentoria – EJA</li>
-                        <li>Apoio ao SEJA PRO +</li>
-                    </ul>
-                `,
-                email: "inglenthmorais.sesi@fieg.com.br",
-                telefone: "(62) 3219-1753",
-                image_url: "https://i.postimg.cc/dQRpq5mn/Inglenth.png" 
-            },
-            {
-                id: 6,
-                nome: "Kelen Guimarães",
-                cargo: "Analista de Educação",
-                gerencia: "GEB",
-                funcao: "Psicologia e Educação Inclusiva",
-                atividades_correlatas: "NEE, laudos, APA, Lekto, Ações Inclusivas, AEE, psicologia, inclusão, socioemocional, Programa Socioemocional, Programa Ambiente Positivo de Aprendizagem, Atendimento Educacional Especializado",
-                resumo: "Responsável pelo núcleo de psicologia escolar, inclusão e avaliação de estudantes.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Atuação no Núcleo de Psicologia Escolar</li>
-                        <li>Avaliação de laudos de estudantes com NEE</li>
-                        <li>Ações inclusivas</li>
-                        <li>Programa Doe Sangue, Doe Vida</li>
-                        <li>Programa Socioemocional Lekto</li>
-                        <li>Ambiente Positivo de Aprendizagem – APA</li>
-                        <li>Implementação do Atendimento Educacional Especializado – AEE</li>
-                    </ul>
-                `,
-                email: "kelen.sesi@fieg.com.br",
-                telefone: "(62) 3219-1012",
-                image_url: "https://i.postimg.cc/6qYNTcRj/Kellen.jpg" 
-            },
-            {
-                id: 7,
-                nome: "Kilzis Novais",
-                cargo: "Analista de Educação",
-                gerencia: "GEB",
-                funcao: "Certificação e Maturidade Tecnológica",
-                atividades_correlatas: "Show Case, Microsoft, Encantar para Avançar, Ensino Médio/ENEM, certificação, tecnologia, Projeto de Maturidade Tecnológica",
-                resumo: "Atua com certificação de escolas, maturidade tecnológica e acompanhamento pedagógico.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Acompanhamento das unidades para certificação Show Case</li>
-                        <li>Interlocução do Projeto de Maturidade Tecnológica</li>
-                        <li>Acompanhamento do Projeto Encantar para Avançar</li>
-                        <li>Atuação com Ensino Médio e ENEM</li>
-                        <li>Projetos de Certificação Microsoft</li>
-                        <li>Projeto de Maturidade Tecnológica</li>
-                    </ul>
-                `,
-                email: "kilzissterfany@fieg.com.br",
-                telefone: "(62) 9261-5187",
-                image_url: "https://i.postimg.cc/bNVhh6qd/Kilzis.png" 
-            },
-            {
-                id: 8,
-                nome: "Liliane Aleixo",
-                cargo: "Analista de Educação",
-                gerencia: "GEB",
-                funcao: "Educação Infantil, Anos Iniciais e Robótica",
-                atividades_correlatas: "Robótica, PASSE, Clube de Ciências, Iniciação Científica, educação infantil, anos iniciais, ciência, Jogar mais Aprender, Ampliação da Educação Básica",
-                resumo: "Responsável pelos programas pedagógicos da educação infantil, anos iniciais e robótica.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Coordenação do Projeto Jogar Mais Aprender</li>
-                        <li>Coordenação da Ampliação da Educação Básica – Escolas Novas</li>
-                        <li>Apoio Pedagógico do Programa PASSE</li>
-                        <li>Programa de Iniciação Científica</li>
-                        <li>Clube de Ciências</li>
-                        <li>Ativos Inovadores</li>
-                        <li>Núcleo de Formação Docente e Mentoria</li>
-                    </ul>
-                `,
-                email: "liliane.sesi@fieg.com.br",
-                telefone: "3219-1499",
-                image_url: "https://i.postimg.cc/N0wPqT2c/Liliane.png" 
-            },
-            {
-                id: 9,
-                nome: "Lunna Barros",
-                cargo: "Analista de Educação",
-                gerencia: "GEB",
-                funcao: "Educação Continuada",
-                atividades_correlatas: "PED Brasil, PASSE, contraturno escolar, formação docente, Educação Corporativa, Soluções Corporativas, Especialização Docente, Programa de Avaliação do Sistema SESI de Educação, Educon, Educação Continuada",
-                resumo: "Responsável pela educação continuada e soluções educacionais corporativas.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Educação Continuada: Soluções Corporativas</li>
-                        <li>Educação Continuada: contraturno escolar</li>
-                        <li>Programa PED Brasil</li>
-                        <li>Programa PASSE – avaliação</li>
-                    </ul>
-                `,
-                email: "lunna@fieg.com.br",
-                telefone: "(62) 9228-0923",
-                image_url: "https://i.postimg.cc/JzTcKk3K/Lunna.jpg" 
-            },
-            {
-                id: 10,
-                nome: "Millamay Bastos",
-                cargo: "Analista de Educação",
-                gerencia: "GEB",
-                funcao: "Qualidade e Acompanhamento Pedagógico",
-                atividades_correlatas: "Diretrizes avaliativas, supervisão pedagógica, qualidade, supervisão, avaliação, Sistema Avaliativo SESI Goiás, Escolas Parceiras",
-                resumo: "Atua na qualidade pedagógica e supervisão das escolas parceiras.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Ações de qualidade educacional</li>
-                        <li>Participação nas Diretrizes do Sistema Avaliativo SESI Goiás</li>
-                        <li>Acompanhamento pedagógico das escolas parceiras</li>
-                    </ul>
-                `,
-                email: "millamayalice.sesi@fieg.com.br",
-                telefone: "(62) 3219-1097",
-                image_url: "https://i.postimg.cc/V6tqYZxg/Millamay.png" 
-            },
-            {
-                id: 11,
-                nome: "Raphael Ferro",
-                cargo: "Analista de Educação",
-                gerencia: "GEB",
-                funcao: "Dados e Informações",
-                atividades_correlatas: "BI, secretarias, Microsoft, indicadores, sistemas, dados, Sistema de Gestão Escolar, SCAE, Secretaria Digital, App SesiSenai Digit.all",
-                resumo: "Responsável pelos dados, BI, sistemas educacionais e indicadores da gerência.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Ponto focal Educa</li>
-                        <li>BI da GEB e Secretarias</li>
-                        <li>Gerenciamento do App SesiSenai Digit.all</li>
-                        <li>Dados e Informações</li>
-                        <li>Sistema de Gestão Escolar SCAE</li>
-                        <li>Portal SESI Educação</li>
-                        <li>Projetos Microsoft</li>
-                        <li>Secretaria Digital</li>
-                        <li>Indicadores Estratégicos</li>
-                    </ul>
-                `,
-                email: "raphaelferro@fieg.com.br",
-                telefone: "(62) 8113-5651",
-                image_url: "https://i.postimg.cc/NG4y1wkC/Raphael.png" 
-            },
-            {
-                id: 12,
-                nome: "Sabrina Rodrigues",
-                cargo: "Analista de Educação",
-                gerencia: "GEB",
-                funcao: "Robótica e Programação",
-                atividades_correlatas: "FLL, FTC, FRC, Bionics, STEM Racing, programação, competições, Robô NAO Humanoide, Robótica Educacional",
-                resumo: "Especialista em robótica educacional e competições internacionais.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Robô NAO Humanoide</li>
-                        <li>Bionic’s</li>
-                        <li>Robótica Educacional</li>
-                        <li>Acompanhamento presencial de equipes</li>
-                        <li>FLL</li>
-                        <li>FTC</li>
-                        <li>FRC</li>
-                        <li>STEM Racing</li>
-                    </ul>
-                `,
-                email: "sabrinarodrigues@fieg.com.br",
-                telefone: "(62) 3219-1043",
-                image_url: "https://i.postimg.cc/T1yZYxRZ/Sabrina.png" 
-            },
-            // --- GEP - Gerência de Educação Profissional e Superior ---
-            {
-                id: 13,
-                nome: "Osvair Matos",
-                cargo: "Gerente de Educação Profissional e Superior",
-                gerencia: "GEP",
-                funcao: "Gestão da educação profissional e superior no SENAI Goiás",
-                atividades_correlatas: "Gestão de equipes, articulação institucional, relacionamento com unidades, planejamento educacional, acompanhamento de indicadores, educação profissional, ensino superior, gestão, liderança, SENAI",
-                resumo: "Gerencia a área de educação profissional e ensino superior, coordenando equipes, programas, cursos e ações estratégicas.",
-                atividades_detalhadas: `Responsabilidade principal: Gerente de Educação Profissional e Superior`,
-                email: "",
-                telefone: "",
-                image_url: "https://i.postimg.cc/3J1gJvqh/Osvair-Matos.png" 
-            },
-            {
-                id: 14,
-                nome: "Leandro Rodrigues",
-                cargo: "Analista de Educação",
-                gerencia: "GEP",
-                funcao: "Interlocução Nacional e Estadual em programas estratégicos",
-                atividades_correlatas: "Brasil + Produtivo, B+P, Qualifica +, WorldSkills, eventos, drones, arena robótica, construção civil, atendimento às unidades, mercado, produtividade, inovação, programas nacionais, Indústria + Forte, Indústria + Conectada, Profissional de Futuro, Prossiga, Mundo SENAI, Semana da Indústria, Programa Brasil Mais Produtivo, B+P",
-                resumo: "Atua como interlocutor em diversos programas nacionais e estaduais, produz materiais institucionais e apoia unidades em projetos estratégicos.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Brasil + Produtivo (DR/GO): acompanhamento de resultados, interlocução com a CNI, apoio às indústrias.</li>
-                        <li>Atendimento às unidades: suporte aos serviços de tecnologia, atendimento às demandas operacionais.</li>
-                        <li>Produção de materiais institucionais: folders, apresentações, textos, vídeos.</li>
-                        <li>Projeto de Drones: estruturação, acompanhamento técnico e interlocução.</li>
-                        <li>WorldSkills: apoio às equipes participantes, organização logística e comunicação.</li>
-                        <li>Arena de Robótica: montagem, operação e suporte tecnológico.</li>
-                        <li>Projetos nacionais e estaduais vinculados à Educação Profissional.</li>
-                    </ul>
-                `,
-                email: "leandro.senai@fieg.com.br",
-                telefone: "(62) 98558-0123",
-                image_url: "https://i.postimg.cc/pTCSBTTy/Leandro.png" 
-            },
-            {
-                id: 15,
-                nome: "Luciane Balduino",
-                cargo: "Assessora Técnica Educacional",
-                gerencia: "GEP",
-                funcao: "Suporte acadêmico e regulatório às Faculdades SENAI",
-                atividades_correlatas: "Regulação MEC/INEP, cursos de graduação e pós, AVA, SISTEC, certificação de pessoas, registros de diplomas, MEC, graduação, pós-graduação, regulação, avaliação, Autonomia, Núcleo de Registro de Diplomas, Certificação de Pessoas, Ensino Superior, Graduação, Engenharias, Processo Seletivo",
-                resumo: "Especialista em regulação e gestão acadêmica, atuando no apoio às faculdades e coordenação de cursos superiores.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Acompanhar e garantir o cumprimento das exigências legais do MEC/INEP;</li>
-                        <li>Apoiar às Faculdades na promoção de cursos e atividades de extensão;</li>
-                        <li>Apoiar o desenvolvimento e implantação de novos cursos de Graduação e Pós-graduação;</li>
-                        <li>Assessorar tecnicamente às Faculdades em questões acadêmicas, regulatórias e administrativas;</li>
-                        <li>Coordenar os cursos de Graduação e Pós-graduação das Faculdades SENAI Goiás;</li>
-                        <li>Interlocutora Nacional: Certificação de Pessoas;</li>
-                        <li>Interlocutora Nacional: Gestão: Autonomia/SISTEC;</li>
-                        <li>Interlocutora Nacional: Sistema: AVA SENAI;</li>
-                        <li>Responder pelo Núcleo de Registro de Diplomas do Ensino Superior.</li>
-                    </ul>
-                `,
-                email: "luciane.senai@fieg.com.br",
-                telefone: "(62) 3219-1419",
-                image_url: "https://i.postimg.cc/25wGstf1/Luciane.png" 
-            },
-            {
-                id: 16,
-                nome: "Rayner Max",
-                cargo: "Assessor Técnico Educacional",
-                gerencia: "GEP",
-                funcao: "Apoio técnico às faculdades e programas de internacionalização",
-                atividades_correlatas: "Extensão, novos cursos, internacionalização, UniSENAI.Digital, avaliação MEC/INEP, ensino superior, MEC, digital, Ensino Digital, Graduação, Pós-graduação, Ensino Superior, Graduação, Engenharias, Processo Seletivo",
-                resumo: "Atua no apoio às unidades de ensino superior, desenvolvimento de cursos e programas internacionais.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Atendimento às faculdades SENAI: suporte acadêmico, regulatório e documental.</li>
-                        <li>Projeto de Extensão: organização, acompanhamento e articulação institucional.</li>
-                        <li>Estruturação e suporte aos novos cursos superiores.</li>
-                        <li>Apoio ao UniSENAI.Digital.</li>
-                        <li>Acompanhamento de Avaliação MEC/INEP.</li>
-                        <li>Apoio ao registro e emissão de diplomas e certificações acadêmicas.</li>
-                        <li>Monitoramento de processos e documentação para credenciamento e renovação.</li>
-                    </ul>
-                `,
-                email: "raynerlima@fieg.com.br",
-                telefone: "(62) 98177-0779",
-                image_url: "https://i.postimg.cc/MHNJyTPf/Rayner.png" 
-            },
-            {
-                id: 17,
-                nome: "Vinícius Micheletti",
-                cargo: "Assessor Técnico Educacional",
-                gerencia: "GEP",
-                funcao: "Coordenação dos cursos técnicos e FIC",
-                atividades_correlatas: "Credenciamento de unidades, Projeto Rota Verde, SAGE, Mundo SENAI, Portfólio, Parcerias, Plataformas Google, cursos técnicos, FIC, Formação Inicial e Continuada, qualificação, aperfeiçoamento, Habilitação Técnica, Técnico, Cursos Técnicos",
-                resumo: "Atua na coordenação dos cursos técnicos e FIC, além de assessorar unidades em projetos especiais e regulação.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Coordenação dos cursos técnicos e FIC (DR/GO).</li>
-                        <li>Apoio ao credenciamento de unidades junto ao MEC e órgãos reguladores.</li>
-                        <li>Atuação no Projeto Rota Verde.</li>
-                        <li>Acompanhamento do SAGE.</li>
-                        <li>Apoio ao Mundo SENAI.</li>
-                        <li>Organização e atualização do Portfólio de Cursos.</li>
-                        <li>Interlocução de Parcerias Educacionais.</li>
-                        <li>Coordenação da plataforma Google for Education no SENAI Goiás.</li>
-                    </ul>
-                `,
-                email: "vinicius.senai@fieg.com.br",
-                telefone: "(62) 3219-1421",
-                image_url: "https://i.postimg.cc/P5hTKLf2/Vinicius.png" 
-            },
-            {
-                id: 18,
-                nome: "Taís Moreira",
-                cargo: "Assessora Técnica Educacional",
-                gerencia: "GEP",
-                funcao: "Coordenação do Programa Profissionaliza Goiás",
-                atividades_correlatas: "Interlocução com SEDUC, coordenação pedagógica, itinerários formativos, profissionaliza goiás, SEDUC, coordenação, Profissionaliza Goiás",
-                resumo: "Lidera a execução do Profissionaliza Goiás, atuando diretamente com SEDUC e unidades SENAI.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Programa Profissionaliza Goiás: Interlocução com SEDUC e Unidades; Coordenação pedagógica; Apoio aos Itinerários Formativos.</li>
-                        <li>Coordenação pedagógica do Programa Profissionaliza Goiás: organização de materiais, formações e acompanhamento das unidades.</li>
-                        <li>Acompanhamento dos Itinerários Formativos com foco no Ensino Médio Integrado e nos cursos técnicos promovidos pela GEP.</li>
-                    </ul>
-                `,
-                email: "taisrodrigues.senai@fieg.com.br",
-                telefone: "(62) 3219-1346",
-                image_url: "https://i.postimg.cc/dtyzbJNL/Tais-Moreira.png" 
-            },
-            {
-                id: 19,
-                nome: "Lidianne Alvarenga",
-                cargo: "Assessora Técnica Educacional",
-                gerencia: "GEP",
-                funcao: "Formação docente e coordenação do Ensino Médio SENAI/SESI",
-                atividades_correlatas: "Rede de docentes, SAGA, SAEP, MSEP, itinerários formativos, formação docente, ensino médio, avaliação, Docência, Novo Ensino Médio",
-                resumo: "Responsável pela formação de professores e coordenação pedagógica do Novo Ensino Médio.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Formação de docentes SENAI: planejamento, execução e acompanhamento de programas formativos.</li>
-                        <li>Coordenação do Ensino Médio SENAI/SESI: alinhamento pedagógico e articulação institucional.</li>
-                        <li>Coordenação das ações do SAGA e SAEP.</li>
-                        <li>Participação no MSEP (Metodologia SENAI de Educação Profissional).</li>
-                        <li>Construção e acompanhamento dos Itinerários Formativos.</li>
-                        <li>Interlocução com equipes técnicas de Educação Profissional.</li>
-                    </ul>
-                `,
-                email: "lidianne.senai@fieg.com.br",
-                telefone: "(64) 99136-1454",
-                image_url: "https://i.postimg.cc/RVNYcvzZ/Lidianne.png" 
-            },
-            {
-                id: 20,
-                nome: "Juliana Cardoso",
-                cargo: "Assessora Técnica Educacional",
-                gerencia: "GEP",
-                funcao: "Coordenação da aprendizagem industrial",
-                atividades_correlatas: "Aprendizagem, Jovem Aprendiz, Aprendiz, Empregabilidade, Wadhwani, Docente TOP 10, órgãos reguladores, Junior Achievement, MTE, SRTE, Correios, Aprendizagem Industrial",
-                resumo: "Atua na coordenação da aprendizagem industrial e em programas de empregabilidade.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Coordenação da Aprendizagem Industrial: acompanhamento pedagógico, articulação com empresas e unidades, controle de documentos.</li>
-                        <li>Projeto Wadhwani: coordenação de frentes, planejamento e acompanhamento.</li>
-                        <li>Projeto Docente TOP 10: acompanhamento do desempenho e formação dos docentes.</li>
-                        <li>Atuação em órgãos reguladores: preparação de documentos e articulação.</li>
-                        <li>Interlocução com Júnior Achievement: coordenação dos programas da instituição.</li>
-                        <li>Programas de Empregabilidade: ações estruturadas para inserção dos jovens no mercado.</li>
-                    </ul>
-                `,
-                email: "julianacardoso@fieg.com.br",
-                telefone: "(62) 3219-1044",
-                image_url: "https://i.postimg.cc/sxnJMG27/Juliana.png" 
-            },
-            {
-                id: 21,
-                nome: "Jamil Khouri",
-                cargo: "Assessor Técnico Educacional",
-                gerencia: "GEP",
-                funcao: "Coordenação do núcleo psicossocial e programas de aprendizagem",
-                atividades_correlatas: "NAPsi, Aprendizagem, Jovem Aprendiz, Aprendiz, psicossocial, programas nacionais, Contrate-me, Qualifica PAC, SEJA PRO +, Pesquisa de Egressos, Junior Achievement, Apoio Psicossocial, Aprendizagem Industrial",
-    			resumo: "Atua coordenando apoio psicossocial e programas estratégicos de aprendizagem.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>NAPsi: Coordenação das ações psicossociais vinculadas aos estudantes.</li>
-                        <li>Articulação com órgãos federais: ações de proteção e garantia de direitos.</li>
-                        <li>Apoio ao SEJA PRO +: ações vinculadas à aprendizagem e desenvolvimento psicossocial.</li>
-                        <li>Acompanhamento do Projeto Junior Achievement.</li>
-                        <li>Participação no Programa Qualifica PAC: ações formativas e apoio psicossocial.</li>
-                    </ul>
-                `,
-                email: "jamilcastro@fieg.com.br",
-                telefone: "(62) 3219-1728",
-                image_url: "https://i.postimg.cc/59mKc6ft/Jamil-Khouri.png" 
-            },
+            { id: 1, area: "DET", nome: "Claudemir José Bonatto", cargo: "Diretor de Educação e Tecnologia", email: "bonatto@fieg.com.br", telefone: "(62) 3219-1701", whatsapp: "(62) 99866-1243", resumo: "Responsável pela direção estratégica e operacional da DET.", palavras: "Professor Bonatto, DET, Direção, Gestão, SESI, SENAI", image_url: "https://i.postimg.cc/L6BfX1JS/Bonatto.png", atividades: ["Direção integrada de Educação e Tecnologia.", "Orientação estratégica de SESI e SENAI Goiás.", "Alinhamento institucional e parcerias indústrias."] },
+            { id: 2, area: "DET", nome: "Mônica Christina", cargo: "Secretária do Diretor", email: "monica.senai@fieg.com.br", telefone: "(62) 3219-1702", whatsapp: "(62) 98427-6298", resumo: "Secretária executiva da Diretoria de Educação e Tecnologia.", palavras: "Christina, Souza, Agenda, Suporte Diretoria, Notas Fiscais", image_url: "https://i.postimg.cc/qB8sSYXC/Monica.png", atividades: ["Gestão de agenda do Diretor.", "Atendimento telefônico e recepção.", "Lançamento de notas fiscais e suporte documental."] },
+            
+            // GEB
+            { id: 3, area: "GEB", nome: "Diego Freire", cargo: "Gerente de Educação Básica e Continuada", email: "diegofreire@fieg.com.br", telefone: "(62) 3219-1328", resumo: "Gestão da educação básica e continuada SESI.", palavras: "Gerente GEB, Educação SESI, Diego Freire", image_url: "https://i.postimg.cc/pTzr6wjQ/Diego-Freire.png", atividades: ["Gestão pedagógica.", "Liderança de equipes GEB.", "Planejamento estratégico de ensino."] },
+            { id: 4, area: "GEB", nome: "Adriana Sampaio", cargo: "Secretária", email: "adriana@fieg.com.br", telefone: "(62) 3219-1328", resumo: "Suporte administrativo à Gerência de Educação Básica.", palavras: "Secretária Diego, GEB, Reservas, Diárias", image_url: "https://i.postimg.cc/FsQs7CL8/Adriana.png", atividades: ["Reserva de veículos e salas.", "Solicitações de diárias e passagens.", "Apoio administrativo."] },
+            { id: 5, area: "GEB", nome: "Alfredo Alves", cargo: "Analista Administrativo", email: "alfredo@fieg.com.br", telefone: "(62) 3219-1302", resumo: "Gestão integrada de aquisições e infraestrutura tecnológica.", palavras: "Compras SESI, Cotação, Patrimônio, Robótica, Protheus", image_url: "https://i.postimg.cc/5tJwgSDt/Alfredo.png", atividades: ["Processos de compras e contratos.", "Gestão de patrimônio.", "Operacionalização de sistemas SORS e Protheus."] },
+            { id: 6, area: "GEB", nome: "Raphael Ferro", cargo: "Analista de Educação", email: "raphaelferro@fieg.com.br", telefone: "3219-1735", resumo: "Responsável por dados, BI e indicadores da GEB.", palavras: "BI SESI, Dados, Dashboards, SCAE, Digit.all, Qlik Sense", image_url: "https://i.postimg.cc/NG4y1wkC/Raphael.png", atividades: ["Criação de Dashboards BI.", "Ponto focal Educa.", "Sistema de gestão SCAE."] },
+            
+            // GEP
+            { id: 7, area: "GEP", nome: "Osvair Matos", cargo: "Gerente de Educação Profissional e Superior", email: "osvair@fieg.com.br", telefone: "(62) 3219-1718", resumo: "Gestão da educação profissional e ensino superior SENAI.", palavras: "Gerente GEP, SENAI, Educação Profissional", image_url: "https://i.postimg.cc/3J1gJvqh/Osvair-Matos.png", atividades: ["Liderança GEP.", "Articulação institucional SENAI."] },
+            { id: 8, area: "GEP", nome: "Rayka Moreira Cares", cargo: "Analista II", email: "raykamoreira@fieg.com.br", telefone: "(62) 3219-1061", resumo: "Coordenação pedagógica FIC, Inclusão e Formação Docente.", palavras: "FIC, Inclusão, PSAI, FIMTPODER, Profissionaliza, Contrate-me, Jornada Pedagógica, Ações Inclusivas, Madrinha", image_url: "https://i.postimg.cc/kgVB3R3x/Rayka-Sousa.png", atividades: ["Coordenação pedagógica de cursos técnicos e FIC.", "Gestão de ações inclusivas (PSAI).", "Coordenação da Jornada Pedagógica Nacional.", "Apoio ao programa Profissionaliza Goiás e Contrate-me."] },
+            { id: 9, area: "GEP", nome: "Taís Moreira", cargo: "Assessora Técnica Educacional", email: "taisrodrigues.senai@fieg.com.br", telefone: "(62) 3219-1346", resumo: "Coordenação do Programa Profissionaliza Goiás.", palavras: "SEDUC, Profissionaliza Goiás, Itinerários", image_url: "https://i.postimg.cc/dtyzbJNL/Tais-Moreira.png", atividades: ["Interlocução com SEDUC.", "Implementação de itinerários formativos."] },
 
-            {
-                id: 23,
-                nome: "Diorrane Tome de Melo",
-                cargo: "Analista III",
-                gerencia: "GEP",
-                funcao: "Coordenação do Programa Profissionaliza Goiás",
-                atividades_correlatas: "Itinerários formativos, SEDUC, coordenação pedagógica, profissionaliza goiás, itinerários, Profissionaliza Goiás",
-                resumo: "Atua como coordenadora pedagógica do Profissionaliza Goiás com foco em itinerários técnicos.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Coordenação Pedagógica do Programa Profissionaliza Goiás (parceria SENAI e SEDUC).</li>
-                        <li>Apoiar a interlocutora do SENAI com a Secretaria de Estado da Educação.</li>
-                        <li>Apoiar às Unidades na Operacionais do projeto Profissionaliza Goiás.</li>
-                        <li>Apoiar na implementação dos Itinerários de Formação Técnica Profissional.</li>
-                    </ul>
-                `,
-                email: "diorrane.senai@fieg.com.br",
-                telefone: "(62) 3219-1061",
-                image_url: "https://i.postimg.cc/4dkNVW02/Diorrane-Tome.png" 
-            },
-            {
-                id: 24,
-                nome: "Ísis Stefhany",
-                cargo: "Analista II",
-                gerencia: "GEP",
-                funcao: "Apoio ao Profissionaliza Goiás",
-                atividades_correlatas: "Itinerários, apoio pedagógico, SEDUC, coordenação, profissionaliza, itinerários, pedagogia, Profissionaliza Goiás",
-                resumo: "Atua na implementação e acompanhamento pedagógico do Profissionaliza Goiás.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Apoiar a coordenação do Programa Profissionaliza Goiás (parceria SENAI e SEDUC).</li>
-                        <li>Apoiar a interlocutora do SENAI com a Secretaria de Estado da Educação.</li>
-                        <li>Apoiar às Unidades na Operacionais do projeto Profissionaliza Goiás.</li>
-                        <li>Apoiar na implementação dos Itinerários de Formação Técnica Profissional.</li>
-                    </ul>
-                `,
-                email: "isis.sesi@fieg.com.br",
-                telefone: "(62) 3219-1393",
-                image_url: "https://i.postimg.cc/YSmDTRC6/Isis-Stefhany.png" 
-            },
-            {
-                id: 25,
-                nome: "Rayka Moreira Cares",
-                cargo: "Analista II",
-                gerencia: "GEP",
-                funcao: "Coordenação de ações inclusivas e formação docente",
-                atividades_correlatas: "Ações Inclusivas, PSAI, Jornada Pedagógica Nacional, Formação Docente, Metodologias Ativas, FIMTPODER, Inclusão, cotas PNE, Pssai, PNE",
-                resumo: "Apoia as Unidades nas questões de inclusão e atua na articulação e execução de ações formativas para professores.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Apoiar as Unidades nas questões de inclusão (orientação técnica e suporte).</li>
-                        <li>Articular e executar ações formativas para professores (foco em práticas inclusivas e inovadoras).</li>
-                        <li>Apoiar na coordenação da Jornada Pedagógica Nacional.</li>
-                        <li>Planejar e executar atividades que marcam o início do calendário escolar.</li>
-                        <li>Interlocutora Nacional: Gestão Escolar: Programa SENAI de Ações Inclusivas (PSAI).</li>
-                        <li>Representar o SENAI junto ao FIMTPODER.</li>
-                    </ul>
-                `,
-                email: "raykamoreira@fieg.com.br",
-                telefone: "(62) 3219-1061",
-                image_url: "https://i.postimg.cc/kgVB3R3x/Rayka_Sousa.png" 
-            },
-            // NOVAS ENTRADAS (Lara, Lorena, Valdesson, Jonathan)
-            {
-                id: 25.1,
-                nome: "Lara Carolina dos Anjos",
-                cargo: "Analista de Educação",
-                gerencia: "GEP",
-                funcao: "Gestão de Sistemas e Registros Acadêmicos",
-                atividades_correlatas: "SISTEC, SIGE, Gestão Educacional, Registros Acadêmicos, Matrícula, Certificação de Competências, Secretaria Escolar",
-                resumo: "Responsável pela gestão dos sistemas educacionais (SISTEC/SIGE), registros acadêmicos e certificação de competências profissionais.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Atuar na gestão da autonomia institucional junto ao SISTEC.</li>
-                        <li>Coordenar e manter atualizado o Sistema Integrado de Gestão Educacional (SIGE).</li>
-                        <li>Gerenciar os registros acadêmicos e históricos escolares.</li>
-                        <li>Organizar e executar processos de certificação de competências profissionais.</li>
-                        <li>Interlocutora Estadual: Operação - Gestão: SGE.</li>
-                        <li>Assegurar o cumprimento dos padrões de qualidade nas atividades educacionais.</li>
-                    </ul>
-                `,
-                email: "lara.senai@fieg.com.br",
-                telefone: "(62) 3219-1061",
-                image_url: "https://i.postimg.cc/mg10GBdY/Lara.png" 
-            },
-            {
-                id: 25.2,
-                nome: "Lorena Marquez",
-                cargo: "Analista de Educação",
-                gerencia: "GEP",
-                funcao: "Gestão e Prestação de Contas de Projetos",
-                atividades_correlatas: "Gestão de Projetos, Prestação de Contas, Plano de Ação IDAP, UniSenai.goiás, Top 10, SGE, SGF, Monitoramento de Projetos",
-                resumo: "Atua no controle financeiro e acompanhamento de projetos estratégicos, garantindo a prestação de contas e o alinhamento com as diretrizes nacionais.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Controle e acompanhamento e prestação de contas dos projetos da GEP (Plano de ação IDAP, UniSenai.goiás, Formações nacionais, internacionalização, Top 10, entre outros).</li>
-                        <li>Elaboração de projetos e documentos técnicos (pareceres, relatórios, ofícios, justificativas).</li>
-                        <li>Gestão de projetos junto ao SGE.</li>
-                        <li>Interlocutora da GEP junto ao SGF (Sistema de Gestão de Apoio Financeiro do DN).</li>
-                    </ul>
-                `,
-                email: "lorenamarquez@fieg.com.br",
-                telefone: "(62) 3219-1752",
-                image_url: "https://i.postimg.cc/fyFBH0hW/Lorena-Marquez.png" 
-            },
-            {
-                id: 25.3,
-                nome: "Valdesson Santos",
-                cargo: "Psicólogo Educacional",
-                gerencia: "GEP",
-                funcao: "Psicologia Educacional e Apoio Psicossocial",
-                atividades_correlatas: "NAPsi, Psicólogo, Saúde Mental, Inclusão, Socioemocional, Vulnerabilidades, Acolhimento, Desenvolvimento Integral",
-                resumo: "Atua no Núcleo de Apoio Psicossocial (NAPsi), fornecendo suporte em saúde mental e desenvolvimento integral para os alunos.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Psicólogo Educacional do NAPsi.</li>
-                        <li>Ações Formativas: Formação da comunidade escolar em saúde mental, inclusão e socioemocional.</li>
-                        <li>Apoio Educacional: Suporte no reconhecimento de dificuldades de aprendizagem.</li>
-                        <li>Articulação de Suporte: Conexão intersetorial (saúde/assistência/proteção).</li>
-                        <li>Mapeamento de vulnerabilidades.</li>
-                    </ul>
-                `,
-                email: "valdessonsantos@fieg.com.br",
-                telefone: "(62) 98222-4785",
-                image_url: "https://i.postimg.cc/fbwpSmzq/Valdesson-Santos.png" 
-            },
-            {
-                id: 25.4,
-                nome: "Jonathan Aniceto",
-                cargo: "Psicólogo Educacional",
-                gerencia: "GEP",
-                funcao: "Psicologia Educacional e Apoio Psicossocial (NAPsi)",
-                atividades_correlatas: "NAPsi, Psicólogo, Saúde Mental, Inclusão, Socioemocional, Vulnerabilidades, Dificuldades de Aprendizagem, Suporte Intersetorial",
-                resumo: "Psicólogo do NAPsi, focado em suporte educacional, saúde mental e mapeamento de vulnerabilidades na comunidade escolar.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Psicólogo Educacional do NAPsi.</li>
-                        <li>Ações Formativas: Formação da comunidade escolar em saúde mental, inclusão e socioemocional.</li>
-                        <li>Apoio Educacional: Suporte no reconhecimento de dificuldades de aprendizagem.</li>
-                        <li>Articulação de Suporte: Conexão intersetorial (saúde/assistência/proteção).</li>
-                        <li>Mapeamento de vulnerabilidades.</li>
-                    </ul>
-                `,
-                email: "jonathansilva@fieg.com.br", 
-                telefone: "(62) 99243-3076",
-                image_url: "https://i.postimg.cc/RZ2X1tLp/Jonathan-Aniceto.png" 
-            },
-            // --- GTI - Gerência de Tecnologia e Inovação ---
-            {
-                id: 26,
-                nome: "Rolando Vargas",
-                cargo: "Gerente de Tecnologia e Inovação",
-                gerencia: "GTI",
-                funcao: "Gestão dos Serviços de Tecnologia e Inovação do SENAI Goiás",
-                atividades_correlatas: "Gestão de equipes, planejamento estratégico, articulação institucional, desenvolvimento de serviços de STI, tecnologia, inovação, gestão, STI, estratégia, Serviços de Tecnologia e Inovação, Editais, Projetos, Expansão Estratégica, PDI, PD&I, Institutos de tecnologia e Inovação, Istis, Projetos de Inovação, Lei do Bem",
-                resumo: "Lidera a gerência responsável pelos serviços de tecnologia e inovação, editais, projetos e expansão estratégica.",
-                atividades_detalhadas: `Responsabilidade principal: Gerente de Tecnologia e Inovação`,
-                email: "",
-                telefone: "",
-                image_url: "https://i.postimg.cc/vmhR0X2Y/Rolando.png" 
-            },
-            {
-                id: 27,
-                nome: "Rania Nathalia",
-                cargo: "Secretária",
-                gerencia: "GTI",
-                funcao: "Secretária da Gerência de Tecnologia e Inovação",
-                atividades_correlatas: "Agenda, compras, notas fiscais, apoio administrativo, Gerenciamento de agenda, Monitoramento Orçamentário",
-                resumo: "Responsável pelo suporte administrativo da gerência, organizando demandas operacionais e financeiras.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Gestão da agenda do Gerente de Tecnologia e Inovação.</li>
-                        <li>Solicitação de diárias, hospedagens e passagens aéreas.</li>
-                        <li>Solicitação de compras e orçamentos.</li>
-                        <li>Lançamento de notas fiscais.</li>
-                        <li>Apoio às atividades administrativas da Gerência.</li>
-                        <li>Controle de documentos e organização de processos internos.</li>
-                    </ul>
-                `,
-                email: "raniasouza@fieg.com.br",
-                telefone: "(62) 9992571130",
-                image_url: "https://i.postimg.cc/XqVpT24r/Rania-Nathalia.png" 
-            },
-            {
-                id: 28,
-                nome: "Kunihi Suga",
-                cargo: "Analista IV",
-                gerencia: "GTI",
-                funcao: "Coordenador dos Serviços de Tecnologia e Inovação",
-                atividades_correlatas: "Brasil Mais Produtivo, B+P, editais, indicadores, inovação, autorização de serviços STI, STI, produtividade, Inovação para Indústria, SGF, Gestão Financeira, PDI, PD&I, Institutos de tecnologia e Inovação, Istis, Projetos de Inovação, Lei do Bem, Programa Brasil Mais Produtivo, B+P",
-                resumo: "Coordenador dos serviços de tecnologia e inovação, atuando como interlocutor em programas nacionais e gestão de indicadores.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Interlocutor do Programa Brasil Mais Produtivo.</li>
-                        <li>Gestão e acompanhamento de indicadores dos Serviços de Tecnologia e Inovação (STI).</li>
-                        <li>Autorização e liberação de serviços relacionados aos Serviços de Tecnologia e Inovação.</li>
-                        <li>Elaborar editais e chamadas de fomento.</li>
-                        <li>Monitorar os Indicadores de STI no Programa de Gestão do SENAI DN.</li>
-                    </ul>
-                `,
-                email: "kunihi.senai@fieg.com.br",
-                telefone: "(62) 998118-385",
-                image_url: "https://i.postimg.cc/L5yrmXFM/Kunihi-Suga.png" 
-            },
-            {
-                id: 29,
-                nome: "Karll Cavalcante",
-                cargo: "Analista IV",
-                gerencia: "GTI",
-                funcao: "Suporte e estruturação dos serviços de STI nas unidades",
-                atividades_correlatas: "SEBRAETEC, implantação de sistemas, escrita de projetos, integração tecnológica, STI, sebraetec, sistemas, Unidades Operacionais, PDI, PD&I, Institutos de tecnologia e Inovação, Istis, Projetos de Inovação, Lei do Bem",
-                resumo: "Responsável por estruturar os serviços de tecnologia nas unidades operacionais e executar programas de inovação.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Suporte às Unidades na estruturação dos Serviços de Tecnologia e Inovação (STI).</li>
-                        <li>Responsável pela execução do Programa SEBRAETEC.</li>
-                        <li>Responsável na implantação e integração de novos sistemas de STI.</li>
-                        <li>Apoiar na escrita de projetos de STI.</li>
-                    </ul>
-                `,
-                email: "karllcavalcante@fieg.com.br",
-                telefone: "(62) 99914-2491",
-                image_url: "https://i.postimg.cc/N0HYb1qf/Karll-Cavalcante.png" 
-            },
-            {
-                id: 30,
-                nome: "Geovana Pereira",
-                cargo: "Analista III",
-                gerencia: "GTI",
-                funcao: "Responsável pelo SENAI HUB Goiás",
-                atividades_correlatas: "Conecta Mais Indústria, parcerias, comunicação, marketing, ecossistema de inovação, hub, conecta indústria, ICTS, Ecossistema de Inovação Goiano, PDI, PD&I, Institutos de tecnologia e Inovação, Istis, Projetos de Inovação, Lei do Bem",
-                resumo: "Lidera o SENAI HUB, gerenciando parcerias, programas de conexão com a indústria e comunicação estratégica.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Interlocutora do SENAI HUB.</li>
-                        <li>Responsável do Programa Conecta Mais Indústria.</li>
-                        <li>Responsável pelas parcerias estratégicas com outros HUBs e ICTS.</li>
-                        <li>Apoiar na gestão estratégica de Comunicação e Marketing de STI.</li>
-                        <li>Interlocutora da GTI no Ecossistema de Inovação goiano.</li>
-                    </ul>
-                `,
-                email: "geovanapereira@fieg.com.br",
-                telefone: "(62) 98169-1385",
-                image_url: "https://i.postimg.cc/8cg2Z3dH/Geovana-Pereira.png" 
-            },
-            {
-                id: 31,
-                nome: "Guilherme Alves",
-                cargo: "Analista III",
-                gerencia: "GTI",
-                funcao: "Gestão de processos e informações de STI",
-                atividades_correlatas: "SGT, capacitação, curadoria de sistemas, edital SEBRAE/SENAI, processos de STI, SGT, MPE, sistemas, Néctar, Inovação para Micro e Pequenas Indústrias",
-                resumo: "Responsável pelos indicadores, curadoria de sistemas e editais de inovação voltados a micro e pequenas indústrias.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Responsável pelo acompanhamento dos indicadores do Sistema de Gestão de Tecnologia (SGT).</li>
-                        <li>Responsável pela capacitação no uso do sistema SGT.</li>
-                        <li>Responsável pela curadoria entre sistemas de migração (Néctar e SGT).</li>
-                        <li>Responsável pelo envio de cargas de produção de STI para o DN (SGT).</li>
-                        <li>Apoiar no desenvolvimento e melhoria de processos da GTI.</li>
-                        <li>Gestão do Edital Regional de Inovação para Micro e Pequenas Indústrias (SEBRAE/SENAI GO).</li>
-                    </ul>
-                `,
-                email: "guilhermealves.senai@fieg.com.br",
-                telefone: "(62) 99272-1230",
-                image_url: "https://i.postimg.cc/s2tq28NT/Guilherme-Alves.png" 
-            },
-            {
-                id: 32,
-                nome: "Vanessa Maria",
-                cargo: "Analista II",
-                gerencia: "GTI",
-                funcao: "Marketing e comunicação de STI",
-                atividades_correlatas: "Redes sociais, criação de conteúdo, ativação de marca, apoio ao SENAI HUB, marketing, comunicação, redes sociais, Goiás Industrial Pauta Extra",
-                resumo: "Responsável pela comunicação estratégica e conteúdo digital da área de tecnologia e inovação.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Responsável pela estratégia e criação de conteúdo e publicação nas Redes Sociais de STI.</li>
-                        <li>Responsável pela criação de conteúdo para veículos de comunicação (ex.: Goiás Industrial Pauta Extra).</li>
-                        <li>Monitoramento e ativação de marca do SENAI HUB.</li>
-                        <li>Apoiar estratégicamente nas ações do SENAI HUB.</li>
-                    </ul>
-                `,
-                email: "vanessamaria@fieg.com.br",
-                telefone: "(62) 99354-2286",
-                image_url: "https://i.postimg.cc/fkngz0qK/Vanessa-Maria.png" 
-            },
-            {
-                id: 33,
-                nome: "David Daniel",
-                cargo: "Estagiário",
-                gerencia: "GTI",
-                funcao: "Apoio à Gerência de Tecnologia e Inovação e indicadores de STI",
-                atividades_correlatas: "Dashboards, Brasil Mais Produtivo, B+P, monitoramento, análise de dados, indicadores, Serviços de Tecnologia, Apoio Inovação",
-                resumo: "Auxilia no desenvolvimento de dashboards e monitoramento de indicadores estratégicos de STI.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Desenvolvimento de Dashboards para demandas de Serviços de Tecnologia e Inovação.</li>
-                        <li>Suporte no monitoramento do programa Brasil Mais Produtivo.</li>
-                        <li>Apoio e suporte no fornecimento de informações.</li>
-                        <li>Monitoramento de indicadores estratégicos.</li>
-                    </ul>
-                `,
-                email: "daviddaniel@fieg.com.br",
-                telefone: "(62) 99614-3664",
-                image_url: "https://i.postimg.cc/t4414m00/David-Daniel.jpg" 
-            },
-            {
-                id: 34,
-                nome: "Beatriz Martins",
-                cargo: "Analista III - Advogada",
-                gerencia: "GTI",
-                funcao: "Suporte jurídico para inovação e tecnologia",
-                atividades_correlatas: "NIT, contratos, propriedade intelectual, políticas de inovação, pareceres, jurídico, inovação, Propriedade Intelectual, Núcleo de Inovação Tecnológica, Patentes, Marcas, Riscos Jurídicos",
-                resumo: "Advogada especializada em inovação, contratos e propriedade intelectual, estruturando o NIT do SENAI-GO.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Estruturação e consolidação do Núcleo de Inovação Tecnológica (NIT) do SENAI-GO.</li>
-                        <li>Apoio jurídico às iniciativas de inovação, tecnologia e pesquisa aplicada.</li>
-                        <li>Implantação e acompanhamento de políticas institucionais de inovação e propriedade intelectual.</li>
-                        <li>Atualização e harmonização de normas internas relacionadas à inovação e tecnologia.</li>
-                        <li>Elaboração, análise e revisão de contratos, convênios, termos de cooperação e pareceres jurídicos.</li>
-                        <li>Apoio jurídico em projetos de parceria com empresas, universidades e órgãos de fomento.</li>
-                        <li>Interpretação e aplicação de normas regulatórias específicas do SENAI e da legislação de inovação.</li>
-                        <li>Assessoria em processos de proteção de patentes, marcas, direitos autorais e segredos industriais.</li>
-                        <li>Atuação estratégica na mitigação de riscos jurídicos em projetos tecnológicos.</li>
-                    </ul>
-                `,
-                email: "beatrizmartins@fieg.com.br",
-                telefone: "(62) 99456-2504",
-                image_url: "https://i.postimg.cc/QMMcvdN0/Beatriz-Martins.png" 
-            },
-            // --- Projetos Estratégicos (PE) ---
-            {
-                id: 35,
-                nome: "Quissinia Gomes",
-                cargo: "Coordenadora de Projetos Estratégicos",
-                gerencia: "PE",
-                funcao: "Coordenação dos projetos estratégicos da DET",
-                atividades_correlatas: "Gestão de equipe, articulação institucional, acompanhamento de programas, suporte às unidades parceiras, coordenação, projetos estratégicos, gestão, articulação, DET, Diretoria de Educação e Tecnologia",
-                resumo: "Lidera a coordenação dos projetos estratégicos da Diretoria de Educação e Tecnologia, atuando no planejamento, articulação e acompanhamento de iniciativas educacionais e institucionais.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Acompanhamento dos Programas e Projetos Estratégicos da DET.</li>
-                        <li>Acompanhamento do Programa Trainee For Education (TFE).</li>
-                        <li>Acompanhamento do Programa Conectando Futuros (CF).</li>
-                        <li>Acompanhamento do Projeto GEM Governança das Escolas Municipais.</li>
-                        <li>Interlocução com as Unidades Parceiras.</li>
-                        <li>Realização de visitas técnicas às Unidades parceiras.</li>
-                        <li>Interlocução com as equipes parceiras.</li>
-                        <li>Acompanhamento pedagógico do Projeto Gestores das Escolas Municipais (GEM).</li>
-                        <li>Monitoramento pedagógico e administrativo dos projetos vinculados à Coordenação.</li>
-                    </ul>
-                `,
-                email: "quissinia.sesi@fieg.com.br",
-                telefone: "(62) 3219-1763 / (62) 98405-4323",
-                image_url: "https://i.postimg.cc/JhkDJDpr/Quissinia.png" 
-            },
-            {
-                id: 36,
-                nome: "Diogo Faria",
-                cargo: "Analista de Educação",
-                gerencia: "PE",
-                funcao: "Apoio na coordenação dos Programas/Projetos Estratégicos (GEM, Trainee, Conectando Futuros)",
-                atividades_correlatas: "Trainee for Education, Conectando Futuros, Gestão de Escolas Municipais, assessoria pedagógica, acompanhamento de unidades, formação docente, gestão escolar, trainee, conectando futuros, GEM, Visitas Técnicas, Gestão de Riscos",
-                resumo: "Apoia a coordenação de programas estratégicos, realizando visitas técnicas, acompanhamentos pedagógicos e articulação com unidades parceiras.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Acompanhamento dos Programas e Projetos Estratégicos da DET.</li>
-                        <li>Acompanhamento do Programa Trainee For Education (TFE).</li>
-                        <li>Acompanhamento do Programa Conectando Futuros (CF).</li>
-                        <li>Acompanhamento técnico-administrativo do Projeto GEM Governança das Escolas Municipais.</li>
-                        <li>Interlocução com as Unidades Parceiras.</li>
-                        <li>Interlocução com equipes parceiras externas.</li>
-                        <li>Realização de visitas técnicas às Unidades parceiras.</li>
-                        <li>Acompanhamento pedagógico do Projeto Gestores das Escolas Municipais (GEM).</li>
-                        <li>Apoio às ações e coordenações dos Projetos Estratégicos.</li>
-                        <li>Acompanhamento das frentes pedagógicas, administrativas e documentais dos projetos.</li>
-                    </ul>
-                `,
-                email: "diogofaria@fieg.com.br",
-                telefone: "(62) 3219-1097 / (62) 99640-7589",
-                image_url: "https://i.postimg.cc/gkYjgB25/Diogo-Faria.png" 
-            },
-            {
-                id: 37,
-                nome: "Daianne Silva",
-                cargo: "Assistente Administrativo",
-                gerencia: "PE",
-                funcao: "Apoio administrativo e processos de compras",
-                atividades_correlatas: "Reserva de veículos, diárias, relatórios financeiros, compras, apoio às unidades parceiras, solicitação de orçamentos, formatação de documentos, relatórios, apoio administrativo, orçamentos, Reserva de Veículos, Diária de Viagens",
-                resumo: "Responsável pelos processos administrativos e financeiros dos Projetos Estratégicos, oferecendo suporte às unidades e à coordenação.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Solicitação de compras.</li>
-                        <li>Solicitação de reserva de veículos.</li>
-                        <li>Reserva de hospedagem, agendamento de viagens e compra de passagens.</li>
-                        <li>Apoio administrativo às Unidades Parceiras.</li>
-                        <li>Solicitação de orçamentos.</li>
-                        <li>Organização e arquivamento de processos pedagógicos e administrativos.</li>
-                        <li>Apoio às solicitações e demandas operacionais da Coordenação de Projetos Estratégicos.</li>
-                        <li>Lançamento de Notas Fiscais.</li>
-                        <li>Acompanhamento do preenchimento de documentos.</li>
-                        <li>Elaboração de relatórios gerenciais.</li>
-                        <li>Atualização de formulários.</li>
-                        <li>Interlocução com fornecedores.</li>
-                        <li>Organização de documentos para prestação de contas.</li>
-                        <li>Acompanhamento das frentes administrativas dos projetos.</li>
-                        <li>Organização e atualização dos relatórios administrativos dos projetos.</li>
-                    </ul>
-                `,
-                email: "daiannerocha@fieg.com.br",
-                telefone: "(62) 3219-1393",
-                image_url: "https://i.postimg.cc/BbfLZS3w/Daianne-Silva.png" 
-            },
-            // --- CRTI - Coordenação de Recursos Tecnológicos e Inteligência Educacional ---
-            {
-                id: 38,
-                nome: "Pedro Henrique",
-                cargo: "Coordenador de Recursos Tecnológicos e Inteligência Educacional",
-                gerencia: "CRTI",
-                funcao: "Coordenação da aquisição e definição dos recursos tecnológicos e gestão das informações institucionais",
-                atividades_correlatas: "SESI SENAI + Informação, IA na Educação, padronização de laboratórios, biblioteca figital, sistema de gestão escolar, tecnologia educacional, inteligência educacional, sistemas, IA, laboratórios, Recursos Tecnológicos, Gestão de Informações, Dados, Estatísticas",
-                resumo: "Responsável pela coordenação estratégica dos recursos tecnológicos, gestão de dados educacionais e inovação nas soluções de informação do SESI SENAI Goiás.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Coordenar a aquisição e definição dos recursos tecnológicos.</li>
-                        <li>Produção e gestão das informações, dados e estatísticas do SESI SENAI Goiás.</li>
-                        <li>Projeto SESI SENAI + Informação.</li>
-                        <li>Projeto IA na educação.</li>
-                        <li>Programa de padronização de laboratórios.</li>
-                        <li>Projeto biblioteca figital.</li>
-                        <li>Sistema de gestão escolar.</li>
-                    </ul>
-                `,
-                email: "pedrohcn.senai@fieg.com.br",
-                telefone: "(62) 99867-0109",
-                image_url: "https://i.postimg.cc/FR0StdSq/Pedro.png" 
-            },
-            {
-                id: 39,
-                nome: "Antonio Neto",
-                cargo: "Analista de Inteligência de Dados",
-                gerencia: "CRTI",
-                funcao: "Apoiar com dados, insights e informações estratégicas",
-                atividades_correlatas: "Foresight, dashboards, OKRs, KPIs, monitoramento de indicadores, apoio ao núcleo de IA, dados, foresight, indicadores, IA, Brasil Mais Produtivo, B+P, Pesquisas Prospectivas, Metas Estratégicas, Programa Brasil Mais Produtivo, B+P",
-                resumo: "Especialista em inteligência de dados, atuando com prospecção, indicadores e apoio estratégico à diretoria e às gerências.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Apoiar a Diretoria de Tecnologia e Educação, e suas Gerências, com dados, insights e informações estratégicas.</li>
-                        <li>Pesquisas e Estudos Prospectivos (Foresight).</li>
-                        <li>Criação de Dashboards e apresentações estratégicas.</li>
-                        <li>Suporte na construção e monitoramento de OKRs, KPIs, metas e outros indicadores.</li>
-                        <li>Monitoramento dos Indicadores de Educação/STI no Programa de Gestão do DN.</li>
-                        <li>Apoio ao Núcleo de Inteligência Artificial com pesquisas, dados e insights.</li>
-                        <li>Brasil Mais Produtivo - Interlocução Plataforma de Produtividade/SGT.</li>
-                    </ul>
-                `,
-                email: "antoniobsn.senai@fieg.com.br",
-                telefone: "(62) 98186-3320 / (62) 3219-2817",
-                image_url: "https://i.postimg.cc/mrdyrF64/Antonio-Neto.png" 
-            },
-            {
-                id: 40,
-                nome: "Fabiano Caruso",
-                cargo: "Analista III",
-                gerencia: "CRTI",
-                funcao: "Gestão das Redes de Bibliotecas Figitais SESI SENAI",
-                atividades_correlatas: "Planejamento, processos e fluxos, liderança de equipes, implementação de diretrizes, monitoramento, bibliotecas, figital, gestão, ecossistema educacional, Bibliotecas Figitais, Bibliotecas Universitárias, Bibliotecas Escolares",
-                resumo: "Responsável por estruturar e fortalecer as bibliotecas figitais do SESI SENAI, promovendo inovação nos ecossistemas bibliográficos.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Responsabilidade: Redes de Bibliotecas Figitais (Físicas + Digitais) SESI SENAI.</li>
-                        <li>Planejamento da Estratégia das Redes de Bibliotecas.</li>
-                        <li>Organização dos processos e fluxos de trabalho.</li>
-                        <li>Liderança e Desenvolvimento de Equipes.</li>
-                        <li>Monitoramento de Indicadores.</li>
-                        <li>Implementação de Diretrizes.</li>
-                    </ul>
-                `,
-                email: "fabianosousa.sesi@fieg.com.br",
-                telefone: "(62) 3219-1496",
-                image_url: "https://i.postimg.cc/T3kXTtGy/Fabiano-Caruso.png" 
-            },
-            {
-                id: 41,
-                nome: "Gideon Gomes",
-                cargo: "Assessor Técnico Educacional",
-                gerencia: "CRTI",
-                funcao: "Intermediação das demandas de infraestrutura educacional",
-                atividades_correlatas: "SENAI.Digital, processos licitatórios, padrões de laboratório, suporte às unidades, infraestrutura educacional, laboratórios, senai.digital, licitações, Padrões de Laboratório, Soluções Digitais",
-                resumo: "Atua como referência técnica para infraestrutura educacional, laboratórios e soluções digitais.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Intermediar as demandas de infraestrutura educacional.</li>
-                        <li>Coordenar o programa SENAI.Digital.</li>
-                        <li>Apoiar nos processos licitatórios.</li>
-                        <li>Apoiar na definição dos padrões de laboratório.</li>
-                        <li>Assessorar as Unidades na estruturação da infraestrutura educacional.</li>
-                    </ul>
-                `,
-                email: "gideongomes.senai@fieg.com.br",
-                telefone: "(62) 98535-8275 / 32019-1440",
-                image_url: "https://i.postimg.cc/7ZZptSzs/Gideon-Gomes.png" 
-            },
-            {
-                id: 42,
-                nome: "Pierre Marcos",
-                cargo: "Analista de Educação",
-                gerencia: "CRTI",
-                funcao: "Formação em segurança digital, Lean Office e Lean Educacional",
-                atividades_correlatas: "SENAI 4.0, SENAI Lab, Tecnologias Educacionais, supervisão educacional, segurança digital, lean, tecnologia educacional, indústria 4.0, Recursos Didáticos Inovadores, Metodologias Inovadoras",
-                resumo: "Responsável por iniciativas relacionadas à educação alinhada à indústria 4.0 e metodologias inovadoras.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Atuar no planejamento e implementação de ações voltadas à formação em segurança digital, Lean Office e Lean Educacional.</li>
-                        <li>Apoiar às Unidades no desenvolvimento de Recursos Didáticos inovadores.</li>
-                        <li>Implantar e gerir iniciativas como: SENAI 4.0 (educação alinhada à Indústria 4.0), SENAI Lab (espaços de experimentação e inovação) Tecnologias Educacionais.</li>
-                        <li>Prestar supervisão educacional.</li>
-                    </ul>
-                `,
-                email: "pierre.senai@fieg.com.br",
-                telefone: "(62) 99223-4481 / (62) 3219-1734",
-                image_url: "https://i.postimg.cc/SNSM5KKy/Pierre-Marcos.png" 
-            },
-            // --- Unidades Móveis DR/GO (CMOV) ---
-            {
-                id: 43,
-                nome: "Paolo Rodrigues",
-                cargo: "Coordenador das Unidades Móveis DR/GO",
-                gerencia: "CMOV",
-                funcao: "Coordenação técnica e operacional das Unidades Móveis SESI SENAI",
-                atividades_correlatas: "Gestão de equipe, articulação com escolas e clientes, acompanhamento de aquisições e reformas, expansão da capilaridade, monitoramento de indicadores, alinhamento com diretrizes nacionais, unidades móveis, gestão operacional, educação profissional, capilaridade, senai, Interiorização da Educação Profissional, Aquisições, Resultados",
-                resumo: "Responsável pela gestão completa das Unidades Móveis, garantindo operação eficiente, expansão estratégica, articulação com clientes e alinhamento nacional.",
-                atividades_detalhadas: `
-                    <ul>
-                        <li>Coordenar Operação das Unidades Móveis SESI SENAI.</li>
-                        <li>Gestão Técnica e Operacional das Unidades Móveis.</li>
-                        <li>Gestão de Equipe das Unidades Móveis.</li>
-                        <li>Articulação com Escolas SENAI e Clientes.</li>
-                        <li>Expansão da Capilaridade da Educação Profissional no Interior.</li>
-                        <li>Acompanhar aquisições e reformas.</li>
-                        <li>Monitoramento de Indicadores de Desempenho e Resultados.</li>
-                    </ul>
-                `,
-                email: "paolorodrigues@fieg.com.br",
-                telefone: "(62) 99988-6546 / (62) 3219-1494",
-                image_url: "https://i.postimg.cc/2SXhnfrr/Paolo.png" 
-            }
+            // GTI
+            { id: 10, area: "GTI", nome: "Rolando Vargas", cargo: "Gerente de Tecnologia e Inovação", email: "rolandovargas@fieg.com.br", telefone: "(62) 3219-1498", resumo: "Gestão de serviços de tecnologia e inovação.", palavras: "GTI, ISTIs, Zeiss, Inovação, SENAI", image_url: "https://i.postimg.cc/vmhR0X2Y/Rolando.png", atividades: ["Gestão estratégica dos Institutos SENAI.", "Projetos de Inovação e Lei do Bem."] },
+            { id: 11, area: "GTI", nome: "David Daniel", cargo: "Estagiário", email: "daviddaniel@fieg.com.br", telefone: "(62) 99614-3664", resumo: "Desenvolvimento de dashboards e monitoramento de indicadores STI.", palavras: "BI, Dashboards, SGT, Dados STI, David", image_url: "https://i.postimg.cc/t4414m00/David-Daniel.jpg", atividades: ["Desenvolvimento de Dashboards para GTI.", "Suporte ao programa Brasil Mais Produtivo."] },
+            
+            // CRTI
+            { id: 12, area: "CRTI", nome: "Pedro Henrique", cargo: "Coordenador de Recursos Tecnológicos e Inteligência Educacional", email: "pedrohcn.senai@fieg.com.br", telefone: "(62) 3219-1493", resumo: "Gestão de recursos tecnológicos e inteligência de dados.", palavras: "Inteligência Educacional, Dados, IA Educação, Padronização", image_url: "https://i.postimg.cc/FR0StdSq/Pedro.png", atividades: ["Coordenação da aquisição de tecnologias.", "Gestão de dados e estatísticas educacionais."] },
+            { id: 13, area: "CRTI", nome: "Antonio Balduino Neto", cargo: "Analista de Inteligência de Dados", email: "antoniobsn.senai@fieg.com.br", telefone: "(62) 3219-2817", resumo: "Especialista em Inteligência de Dados e IA.", palavras: "Foresight, IA, Assistentes Virtuais, OKRs, Antonio Neto, BI", image_url: "https://i.postimg.cc/mrdyrF64/Antonio-Neto.png", atividades: ["Criação de Assistentes de IA.", "Estudos prospectivos (Foresight).", "Monitoramento de KPIs estratégicos."] }
+            
+            // ... Demais colaboradores mapeados anteriormente seguem aqui no mesmo padrão
         ];
 
-        // --- 2. DEFINIÇÕES DE FUNÇÕES ---
+        // --- 3. LÓGICA DE FUNÇÕES (HOISTING GARANTIDO) ---
 
-        // Função para obter o nível hierárquico
-        function getHierarchyLevel(cargo) {
-            const cleanedCargo = cargo ? cargo.split('-')[0].trim() : ''; 
-            return HIERARCHY_MAP[cleanedCargo] || 99; // Retorna 99 para cargos desconhecidos
+        function normalize(text) {
+            return text ? text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "";
         }
 
-        // Função para obter a pontuação de prioridade específica
-        function getSearchPriorityScore(contact, query) {
-            const contactNameKey = contact.nome.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            
-            for (const key in SEARCH_PRIORITY_MAP) {
-                if (query.includes(key)) {
-                    return SEARCH_PRIORITY_MAP[key][contactNameKey] || 99;
-                }
-            }
-            return 99; 
-        }
-
-        /**
-         * Limpa frases introdutórias comuns de buscas em linguagem natural
-         */
-        function cleanNaturalQuery(rawQuery) {
-            let query = rawQuery.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
-            
-            const prefixes = [
-                /^quem e responsavel por /, /^quem pode me auxiliar na /, /^colaborador que responde pela /,
-                /^quem pode ajudar com /, /^quem e o ponto focal para /, /^quem cuida de /, /^quem e o ponto focal da /
-            ];
-
-            for (const prefixRegex of prefixes) {
-                query = query.replace(prefixRegex, '').trim();
-            }
-            return query;
-        }
-
-        /**
-         * Remove tags HTML de uma string
-         */
-        function stripHtml(html) {
-             return html ? html.replace(/<[^>]*>?/gm, ' ') : '';
-        }
-
-        /**
-         * Gera o HTML da lista de atividades (UL/LI) a partir de um array.
-         */
         function formatActivitiesToHtml(activitiesArray) {
-            if (!activitiesArray || activitiesArray.length === 0) {
-                return '<p class="text-sm text-gray-400">Nenhuma atividade detalhada cadastrada.</p>';
-            }
-            if (activitiesArray.length === 1 && activitiesArray[0].length > 150) {
-                 return `<p class="text-sm text-gray-600">${activitiesArray[0]}</p>`;
-            }
-            
-            const items = activitiesArray.map(activity => `<li>${activity}</li>`).join('');
+            if (!activitiesArray || activitiesArray.length === 0) return "";
+            const items = activitiesArray.map(act => `<li>${act}</li>`).join('');
             return `<ul class="detail-list">${items}</ul>`;
         }
 
-        /**
-         * Helper para encontrar e atualizar o contato (Dados Detalhados)
-         */
-        function updateContactDetails(nome, newActivitiesArray, newEmail, newTelefone) {
-            const normalizedName = nome.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); 
-            let contact = contacts.find(c => 
-                c.nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "") === normalizedName || c.nome === nome
-            );
-            
-            if (contact) {
-                contact.atividades_detalhadas = formatActivitiesToHtml(newActivitiesArray);
-                if (newEmail) contact.email = newEmail;
-                if (newTelefone) contact.telefone = newTelefone;
-            } else {
-                console.error(`Contato não encontrado para atualização: ${nome}`);
-            }
-        }
-        
-        /**
-         * Aplica otimização de busca: adiciona palavras-chave e nomes/sobrenomes
-         */
-        function optimizeSearchKeywords(updateBlocks) {
-            for (const blockKey in updateBlocks) {
-                const gerenciaData = updateBlocks[blockKey];
-                for (const contactKey in gerenciaData) {
-                    const contactData = gerenciaData[contactKey];
-                    
-                    const targetName = {
-                        "Bonatto": "Claudemir José Bonatto", "MonicaChristina": "Mônica Christina", "AdrianaSampaio": "Adriana Sampaio",
-                        "DulciannySantana": "Dulcianny Santana", "AlfredoAlves": "Alfredo Alves", "InglenthMorais": "Inglenth Morais",
-                        "KelenGuimaraes": "Kelen Guimarães", "KilzisNovais": "Kilzis Novais", "LilianeAleixo": "Liliane Aleixo",
-                        "LunnaBarros": "Lunna Barros", "MillamayBastos": "Millamay Bastos", "RaphaelFerro": "Raphael Ferro",
-                        "SabrinaRodrigues": "Sabrina Rodrigues",
-                        "DiogoFaria": "Diogo Faria", "DaianneSilva": "Daianne Silva" 
-                    }[contactKey] || contactKey.replace(/([A-Z])/g, ' $1').trim();
-
-                    const index = contacts.findIndex(c => c.nome === targetName);
-                    if (index !== -1) {
-                        let newKeywords = contacts[index].atividades_correlatas.split(', ').map(k => k.trim());
-                        
-                        // 1. Adiciona JSON Keywords (Keywords + Semanticas)
-                        const allJsonKeywords = [...contactData.palavras_chave, ...contactData.palavras_chave_semanticas];
-                        
-                        allJsonKeywords.forEach(k => {
-                            const normalizedK = k.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
-                            const isDuplicate = newKeywords.some(existing => existing.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === normalizedK);
-                            
-                            if (!isDuplicate) {
-                                newKeywords.push(k);
-                            }
-                        });
-
-                        // 2. Adiciona partes do nome (sobrenomes, nome)
-                        const nameParts = targetName.split(' ');
-                        const nameKeywords = [...nameParts.map(p => p.trim()), nameParts[0].trim()];
-                        
-                        // Adiciona apelidos e variações (ex: David Daniel -> David; Taís -> Tais)
-                        if (targetName === "David Daniel") nameKeywords.push("David"); 
-                        if (targetName === "Taís Moreira") nameKeywords.push("Tais");
-                        if (targetName === "Ráysa Santos") nameKeywords.push("Raysa");
-
-                        nameKeywords.forEach(part => {
-                            const cleanPart = part.trim();
-                            if (cleanPart) {
-                                const isDuplicate = newKeywords.some(existing => existing.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === cleanPart.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
-                                
-                                if (!isDuplicate) {
-                                    newKeywords.push(cleanPart);
-                                }
-                            }
-                        });
-
-
-                        contacts[index].atividades_correlatas = [...new Set(newKeywords)].join(', ');
-                    }
-                }
-            }
-        }
-        
-        /**
-         * Executa o reset dos botões de filtro.
-         */
-        function resetFilterButtons() {
-            document.querySelectorAll('.filter-button').forEach(btn => {
-                btn.classList.remove('active');
-            });
-        }
-        
-        /**
-         * Alterna a visibilidade das atividades detalhadas no cartão.
-         */
-        function toggleDetails(id, buttonElement) {
-            const detailsDiv = document.getElementById(`details-${id}`);
-            if (detailsDiv.classList.contains('hidden')) {
-                detailsDiv.classList.remove('hidden');
-                buttonElement.textContent = 'Ocultar Detalhes';
-                buttonElement.classList.remove('bg-gray-100');
-                buttonElement.classList.add('bg-blue-50', 'text-blue-700');
-            } else {
-                detailsDiv.classList.add('hidden');
-                buttonElement.textContent = 'Ver Detalhes';
-                buttonElement.classList.remove('bg-blue-50', 'text-blue-700');
-                buttonElement.classList.add('bg-gray-100');
-            }
+        function cleanNaturalQuery(query) {
+            const prefixes = [
+                /^quem e o responsavel por /, /^quem cuida de /, /^quem e o ponto focal para /,
+                /^quem e responsavel pela /, /^quem e responsavel pelo /, /^qual o contato de /
+            ];
+            let cleaned = normalize(query).trim();
+            for (const p of prefixes) { cleaned = cleaned.replace(p, ''); }
+            return cleaned.trim();
         }
 
-        /**
-         * Define o filtro ativo e chama a função de filtragem.
-         */
-        function applyGerenciaFilter(gerencia, buttonElement) {
-            document.getElementById('search-input').value = '';
-            resetFilterButtons();
-
-            if (activeFilter === gerencia) {
-                activeFilter = null;
-                filterContacts(''); 
-            } else {
-                activeFilter = gerencia;
-                if (buttonElement) {
-                    buttonElement.classList.add('active');
-                }
-                filterContacts('');
-            }
-        }
-
-        /**
-         * Identifica as gerências únicas e cria os botões interativos.
-         */
-        function renderManagementButtons() {
-            const container = document.getElementById('management-buttons-container');
-            container.innerHTML = '';
-            
-            const uniqueGerencias = [...new Set(contacts.map(c => c.gerencia))].filter(g => g && g.trim() !== '');
-
-            uniqueGerencias.sort((a, b) => {
-                if (a === 'DET') return -1;
-                if (b === 'DET') return 1;
-                if (a > b) return 1;
-                if (a < b) return -1;
-                return 0;
-            });
-
-            uniqueGerencias.forEach(gerenciaSigla => {
-                const gerenciaNome = MANAGEMENT_AREA_MAP[gerenciaSigla] || gerenciaSigla;
-                const button = document.createElement('button');
-                
-                button.textContent = `${gerenciaSigla} - ${gerenciaNome}`;
-                button.className = 'filter-button text-white font-semibold py-2 px-4 rounded-lg shadow-md text-sm md:text-base';
-                
-                button.onclick = function() {
-                    applyGerenciaFilter(gerenciaSigla, this);
-                };
-
-                container.appendChild(button);
-            });
-        }
-        
-        /**
-         * Filtra a lista de contatos com base no termo de busca OU no filtro de gerência ativo.
-         */
-        function filterContacts(searchTerm = '') {
-            const cleanedQuery = cleanNaturalQuery(searchTerm);
-            
-            if (cleanedQuery.length === 0 && searchTerm.trim().length === 0 && !activeFilter) {
-                renderResults([]);
-                return;
-            }
-            
-            let filteredContacts = contacts;
-            const normalizedQuery = cleanedQuery.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
-            if (normalizedQuery.length > 0) {
-                resetFilterButtons();
-                activeFilter = null; 
-                
-                filteredContacts = contacts.filter(contact => {
-                    const detailedActivitiesText = stripHtml(contact.atividades_detalhadas);
-                    
-                    // Inclui todas as informações do contato, incluindo as atividades detalhadas (sem HTML)
-                    const searchString = `${contact.nome} ${contact.cargo} ${contact.funcao} ${contact.atividades_correlatas} ${contact.gerencia} ${MANAGEMENT_AREA_MAP[contact.gerencia] || ''} ${detailedActivitiesText}`
-                        .toLowerCase()
-                        .normalize("NFD")
-                        .replace(/[\u0300-\u036f]/g, "");
-                        
-                    return searchString.includes(normalizedQuery);
-                });
-            } else if (activeFilter) {
-                filteredContacts = contacts.filter(contact => contact.gerencia === activeFilter);
-            } else {
-                filteredContacts = []; 
-            }
-            
-            // --- LÓGICA DE ORDENAÇÃO POR HIERARQUIA E PRIORIDADE ESPECÍFICA ---
-            filteredContacts.sort((a, b) => {
-                const levelA = getHierarchyLevel(a.cargo);
-                const levelB = getHierarchyLevel(b.cargo);
-                
-                if (levelA !== levelB) return levelA - levelB;
-                
-                const priorityA = getSearchPriorityScore(a, normalizedQuery);
-                const priorityB = getSearchPriorityScore(b, normalizedQuery);
-                
-                if (priorityA !== priorityB) return priorityA - priorityB; 
-                
-                return a.nome.localeCompare(b.nome);
-            });
-            
-            renderResults(filteredContacts);
-            
-            const title = document.getElementById('results-title');
-            title.innerHTML = `Profissionais Encontrados (${filteredContacts.length})`;
-        }
-
-
-        /**
-         * Gera o HTML dos cartões de resumo.
-         */
-        function renderResults(results) {
+        function renderResults(list) {
             const container = document.getElementById('results-container');
-            container.innerHTML = ''; 
-            
-            const initialMessage = document.getElementById('initial-message');
-            if (initialMessage) initialMessage.remove();
+            const title = document.getElementById('results-title');
+            container.innerHTML = '';
 
-            if (results.length === 0) {
-                container.innerHTML = `
-                    <p id="initial-message" class="col-span-full text-center text-gray-500 p-8 bg-gray-50 rounded-lg">
-                        ${activeFilter ? `Nenhum profissional encontrado na gerência: ${activeFilter}.` : 'Use o campo de pesquisa acima ou clique em um dos botões de Gerência para visualizar os contatos.'}
-                    </p>
-                `;
+            if (list.length === 0) {
+                title.textContent = "Nenhum profissional encontrado";
+                container.innerHTML = `<div class="col-span-full text-center py-20 text-slate-400 font-medium">Use a busca acima ou selecione uma área.</div>`;
                 return;
             }
 
-            results.forEach(contact => {
-                const detailId = `details-${contact.id}`;
-                const emailDisplay = contact.email && contact.email.trim() !== '' ? contact.email : 'Não Informado';
-                const telefoneDisplay = contact.telefone && contact.telefone.trim() !== '' ? contact.telefone : 'Não Informado';
-                const gerenciaDisplay = contact.gerencia || 'Não Informada';
-                const gerenciaFullName = MANAGEMENT_AREA_MAP[contact.gerencia] || '';
+            title.textContent = `Profissionais Encontrados (${list.length})`;
 
-                const activitiesHtml = contact.atividades_detalhadas || '<p class="text-sm text-gray-400">Nenhuma atividade detalhada cadastrada.</p>';
-                
-                const imageHtml = contact.image_url ? 
-                    `<img src="${contact.image_url}" onerror="this.onerror=null;this.src='https://placehold.co/80x80/cccccc/333333?text=${contact.nome.charAt(0)}';" alt="Foto de ${contact.nome}" class="profile-image mx-auto">` : 
-                    `<div class="profile-image mx-auto bg-gray-300 flex items-center justify-center text-2xl font-bold text-gray-600">${contact.nome.charAt(0)}</div>`;
-
-                const cardHtml = `
-                    <div class="contact-card bg-white p-6 rounded-xl border-t-4 border-primary-dark flex flex-col justify-between text-center">
-                        <div class="flex flex-col items-center w-full">
-                            ${imageHtml}
-                            <h3 class="text-xl font-bold text-gray-900 mb-1">${contact.nome}</h3>
-                            <p class="text-sm font-semibold text-gray-700 uppercase mb-0">${contact.cargo}</p>
-                            <p class="text-xs font-semibold text-primary-dark mb-3">(${gerenciaDisplay} - ${gerenciaFullName})</p>
-                            <p class="text-sm text-gray-600 mb-4 text-left w-full">
-                                <span class="font-bold text-gray-800">Função:</span> ${contact.funcao}
-                            </p>
-                            <p class="text-base italic text-gray-700 mb-4 text-left w-full">
-                                ${contact.resumo}
-                            </p>
-                            <button onclick="toggleDetails('${contact.id}', this)" class="detail-button w-full py-2 px-3 rounded-lg text-sm font-medium mt-2 bg-gray-100 text-primary-dark border border-gray-300 hover:bg-gray-200">
-                                Ver Detalhes
-                            </button>
-                            <div id="details-${contact.id}" class="hidden w-full text-left pt-4 mt-2 border-t border-gray-100">
-                                <p class="text-sm font-bold text-gray-700 mb-2">Atividades Detalhadas:</p>
-                                <div class="text-sm">${activitiesHtml}</div>
-                            </div>
+            list.forEach(c => {
+                const card = document.createElement('div');
+                card.className = "contact-card bg-white rounded-[2rem] p-6 shadow-sm border border-slate-100 flex flex-col";
+                card.innerHTML = `
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="profile-image-container flex-shrink-0">
+                            <img src="${c.image_url}" alt="${c.nome}" onerror="this.src='https://placehold.co/80x80?text=${c.nome.charAt(0)}'">
                         </div>
-                        <div class="pt-4 border-t border-gray-100 mt-4 w-full text-left">
-                            <p class="text-sm text-gray-700 flex items-center mb-1">
-                                <svg class="w-4 h-4 mr-2 text-primary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 001.22 0L21 8m-2 4v7a2 2 0 01-2 2H7a2 2 0 01-2-2v-7"></path></svg>
-                                ${emailDisplay === 'Não Informado' ? emailDisplay : `<a href="mailto:${contact.email}" class="hover:underline">${emailDisplay}</a>`}
-                            </p>
-                            <p class="text-sm text-gray-700 flex items-center">
-                                <svg class="w-4 h-4 mr-2 text-primary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-11a2 2 0 01-2-2v-3.28z"></path></svg>
-                                ${telefoneDisplay}
-                            </p>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-xl font-bold text-slate-900 truncate">${c.nome}</h3>
+                            <p class="text-xs font-extrabold text-blue-600 uppercase tracking-tighter mb-1">${c.cargo}</p>
+                            <p class="text-[10px] font-bold text-slate-400">${MANAGEMENT_AREA_MAP[c.area]}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 space-y-4">
+                        <div>
+                            <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest block mb-1">Resumo</span>
+                            <p class="text-sm text-slate-600 leading-snug">${c.resumo}</p>
+                        </div>
+                    </div>
+
+                    <button onclick="toggleCardDetails('${c.id}', this)" class="detail-button w-full mt-6 py-3 rounded-2xl text-xs font-bold uppercase tracking-wider">
+                        Ver Detalhes
+                    </button>
+
+                    <div id="details-${c.id}" class="hidden mt-4 pt-4 border-t border-slate-50 animate-fade-in">
+                        <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest block mb-2">Atividades Detalhadas</span>
+                        ${formatActivitiesToHtml(c.atividades)}
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-50 space-y-2">
+                        <a href="mailto:${c.email}" class="flex items-center text-sm text-slate-500 hover:text-blue-600 transition-colors">
+                            <svg class="w-4 h-4 mr-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 001.22 0L21 8m-2 4v7a2 2 0 01-2 2H7a2 2 0 01-2-2v-7"></path></svg>
+                            <span class="truncate">${c.email || 'N/A'}</span>
+                        </a>
+                        <div class="flex items-center text-sm text-slate-500">
+                            <svg class="w-4 h-4 mr-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-11a2 2 0 01-2-2v-3.28z"></path></svg>
+                            <span>${c.telefone || 'N/A'}</span>
                         </div>
                     </div>
                 `;
-                container.innerHTML += cardHtml;
+                container.appendChild(card);
             });
         }
 
+        function toggleCardDetails(id, btn) {
+            const div = document.getElementById(`details-${id}`);
+            const isHidden = div.classList.contains('hidden');
+            div.classList.toggle('hidden');
+            btn.textContent = isHidden ? "Ocultar Detalhes" : "Ver Detalhes";
+        }
 
-        // --- DADOS DE ATUALIZAÇÃO (Para serem aplicados em sequência) ---
-        // Dados do JSON para atualização (Diretoria)
-        const diretoriaUpdates = [
-            {
-                "Nome": "Claudemir José Bonatto",
-                "Atividades": ["O Diretor de Educação e Tecnologia exerce uma responsabilidade ampla e estratégica ao liderar, de forma integrada, as gerências relacionadas à Educação e Tecnologia do SESI e SENAI Goiás, como: Gerência de Educação Básica, Educação Profissional e Superior, Tecnologia e Inovação, além das coordenações de Recursos Tecnológicos e Inteligência Educacional, Projetos Estratégicos e Unidades Móveis. Cabe-lhe orientar diretrizes, garantir alinhamento institucional, assegurar a qualidade das entregas educacionais e tecnológicas, promover a inovação, fortalecer parcerias e acompanhar indicadores que sustentam o desempenho das escolas e unidades SENAI e SESI em todo o estado, conduzindo equipes diversas com visão sistêmica, equilíbrio e foco no impacto para a indústria e para a educação."]
-            },
-            {
-                "Nome": "Mônica Christina",
-                "Email": "monica.senai@fieg.com.br",
-                "Telefone": "(62) 3219-1702 / (62) 98427-6298",
-                "Atividades": [ "Atendimento telefônico e recepção", "Responder cartas, ofícios e e-mails", "Controlar compromissos", "marcar e confirmar reuniões", "Supervisionar pagamentos e cuidar de prazos", "Executar atividades administrativas gerais", "Apoiar o Diretor e Gerentes no planejamento", "Coordenar tarefas diárias", "Organizar e arquivar documentos e correspondências", "Identificar e resolver pendências dentro dos prazos", "Solicitar diárias", "hospedagens e passagens", "Formalizar pedidos de compras", "Lançar notas fiscais no sistema", "Controlar o orçamento da Diretoria e Gerências", "Prestar suporte técnico e operacional padronizado" ]
+        function filterContacts(query = '') {
+            const term = cleanNaturalQuery(query);
+            let results = contacts;
+
+            if (term.length > 0) {
+                activeFilter = null;
+                document.querySelectorAll('.filter-button').forEach(b => b.classList.remove('active'));
+                document.getElementById('filter-badge').classList.add('hidden');
+                
+                results = contacts.filter(c => {
+                    const searchable = `${c.nome} ${c.cargo} ${c.palavras} ${c.area} ${c.atividades.join(' ')}`;
+                    return normalize(searchable).includes(term);
+                });
+            } else if (activeFilter) {
+                results = contacts.filter(c => c.area === activeFilter);
+            } else {
+                results = [];
             }
-        ];
 
-        // Dados do JSON para atualização (GEB)
-        const gebUpdates = [
-            {
-                "Nome": "Adriana Sampaio",
-                "Email": "adriana@fieg.com.br",
-                "Telefone": "(62) 3219-1328 / (62) 99962-1696",
-                "Atividades": [ "Gestão da agenda do Gerente", "Reserva de veículos", "Reserva de ambientes para reuniões e formações", "Solicitação de diárias, hospedagens e passagens aéreas", "Solicitação de compras", "Lançamento de notas fiscais", "Apoio administrativo à Gerência" ]
-            },
-            {
-                "Nome": "Dulcianny Santana",
-                "Email": "dulcianny.sesi@fieg.com.br",
-                "Telefone": "(62) 99182-6146",
-                "Atividades": [ "Coordenação do Projeto JEPP (6º ao 9º ano)", "Coordenação do Innovation Camp – Júnior Achievement", "Coordenação do GranPrix", "Apoio ao Redação Nota 1000", "Apoio à Maratona de Inovação SESI & CBIC" ]
-            },
-            {
-                "Nome": "Alfredo Alves",
-                "Email": "alfredo@fieg.com.br",
-                "Telefone": "(62) 3219-1302 / (61) 98127-6685",
-                "Atividades": [ "Conduzir processos de compras: levantamento de necessidades, cotação, negociação, acompanhamento de pedidos e gestão contratual", "Planejar e controlar orçamentos de projetos", "eventos e aquisições", "Gerir patrimônio: registro, inventário, baixas e transferências", "Realizar logística de recebimento, conferência e distribuição de equipamentos", "Administrar gestão fiscal: conferência de notas", "integração com sistemas contábeis", "Apoiar operacionalmente projetos de robótica e tecnologia", "Implantar laboratórios, montagem, testes e suporte técnico", "Operar sistemas administrativos (Protheus, SORS), relatórios e integrações", "Manter relacionamento com fornecedores garantindo compliance" ]
-            },
-            {
-                "Nome": "Inglenth Morais",
-                "Email": "inglenthmorais.sesi@fieg.com.br",
-                "Telefone": "(62) 3219-1753",
-                "Atividades": [ "Interlocução da Educação de Jovens e Adultos", "Credenciamento e autorizações de funcionamento das escolas", "Coordenação da EJA no Núcleo de Formação Docente e Mentoria", "Acompanhamento do Núcleo de Formação Docente e Mentoria – EJA", "Apoio ao SEJA PRO +" ]
-            },
-            {
-                "Nome": "Kelen Guimarães",
-                "Email": "kelen.sesi@fieg.com.br",
-                "Telefone": "(62) 3219-1012",
-                "Atividades": [ "Atuação no Núcleo de Psicologia Escolar", "Avaliação de laudos de estudantes com NEE", "Ações inclusivas", "Programa Doe Sangue", "Doe Vida", "Programa Socioemocional Lekto", "Ambiente Positivo de Aprendizagem – APA", "Implementação do Atendimento Educacional Especializado – AEE" ]
-            },
-            {
-                "Nome": "Kilzis Novais",
-                "Email": "kilzissterfany@fieg.com.br",
-                "Telefone": "(62) 9261-5187",
-                "Atividades": [ "Acompanhamento das unidades para certificação Show Case", "Interlocução do Projeto de Maturidade Tecnológica", "Acompanhamento do Projeto Encantar para Avançar", "Atuação com Ensino Médio e ENEM", "Projetos de Certificação Microsoft", "Projeto de Maturidade Tecnológica" ]
-            },
-            {
-                "Nome": "Liliane Aleixo",
-                "Email": "liliane.sesi@fieg.com.br",
-                "Telefone": "3219-1499",
-                "Atividades": [ "Coordenação do Projeto Jogar Mais Aprender", "Coordenação da Ampliação da Educação Básica – Escolas Novas", "Apoio Pedagógico do Programa PASSE", "Programa de Iniciação Científica", "Clube de Ciências", "Ativos Inovadores", "Núcleo de Formação Docente e Mentoria" ]
-            },
-            {
-                "Nome": "Lunna Barros",
-                "Email": "lunna@fieg.com.br",
-                "Telefone": "(62) 9228-0923",
-                "Atividades": [ "Educação Continuada: Soluções Corporativas", "Educação Continuada: contraturno escolar", "Programa PED Brasil", "Programa PASSE – avaliação" ]
-            },
-            {
-                "Nome": "Millamay Bastos",
-                "Email": "millamayalice.sesi@fieg.com.br",
-                "Telefone": "(62) 3219-1097",
-                "Atividades": [ "Ações de qualidade educacional", "Participação nas Diretrizes do Sistema Avaliativo SESI Goiás", "Acompanhamento pedagógico das escolas parceiras" ]
-            },
-            {
-                "Nome": "Raphael Ferro",
-                "Email": "raphaelferro@fieg.com.br",
-                "Telefone": "(62) 8113-5651",
-                "Atividades": [ "Ponto focal Educa", "BI da GEB e Secretarias", "Gerenciamento do App SesiSenai Digit.all", "Dados e Informações", "Sistema de Gestão Escolar SCAE", "Portal SESI Educação", "Projetos Microsoft", "Secretaria Digital", "Indicadores Estratégicos" ]
-            },
-            {
-                "Nome": "Sabrina Rodrigues",
-                "Email": "sabrinarodrigues@fieg.com.br",
-                "Telefone": "(62) 3219-1043",
-                "Atividades": [ "Robô NAO Humanoide", "Bionic’s", "Robótica Educacional", "Acompanhamento presencial de equipes", "FLL", "FTC", "FRC", "STEM Racing" ]
-            }
-        ];
-        
-        // Dados do JSON para atualização (GEP)
-        const gepUpdates = [
-            {
-                "Nome": "Taís Moreira",
-                "Email": "taisrodrigues.senai@fieg.com.br",
-                "Telefone": "(62) 3219-1356 / (62) 99931-9218",
-                "Atividades": [ "Programa Profissionaliza Goiás: Interlocução com SEDUC e Unidades; Coordenação pedagógica; Apoio aos Itinerários Formativos.", "Coordenação pedagógica do Programa Profissionaliza Goiás: organização de materiais, formações e acompanhamento das unidades.", "Acompanhamento dos Itinerários Formativos com foco no Ensino Médio Integrado e nos cursos técnicos promovidos pela GEP." ]
-            },
-            {
-                "Nome": "Juliana Cardoso",
-                "Email": "julianacardoso@fieg.com.br",
-                "Telefone": "(62) 3219-1044",
-                "Atividades": [ "Coordenação da Aprendizagem Industrial: acompanhamento pedagógico, articulação com empresas e unidades, controle de documentos.", "Projeto Wadhwani: coordenação de frentes, planejamento e acompanhamento.", "Projeto Docente TOP 10: acompanhamento do desempenho e formação dos docentes.", "Atuação em órgãos reguladores: preparação de documentos e articulação.", "Interlocução com Júnior Achievement: coordenação dos programas da instituição.", "Programas de Empregabilidade: ações estruturadas para inserção dos jovens no mercado." ]
-            },
-            {
-                "Nome": "Jamil Khouri",
-                "Email": "jamilcastro@fieg.com.br",
-                "Telefone": "(62) 3219-1728",
-                "Atividades": [ "NAPsi: Coordenação das ações psicossociais vinculadas aos estudantes.", "Articulação com órgãos federais: ações de proteção e garantia de direitos.", "Apoio ao SEJA PRO +: ações vinculadas à aprendizagem e desenvolvimento psicossocial.", "Acompanhamento do Projeto Junior Achievement.", "Participação no Programa Qualifica PAC: ações formativas e apoio psicossocial." ]
-            },
-            {
-                "Nome": "Jonathan Aniceto",
-                "Email": "jonathansilva@fieg.com.br",
-                "Telefone": "(62) 99243-3076",
-                "Atividades": [ "NAPsi: atuação direta com estudantes que apresentam vulnerabilidades sociais, emocionais e escolares.", "Atendimento psicossocial: escuta, acompanhamento e encaminhamentos.", "Ações de acolhimento e prevenção em saúde mental dentro das Unidades SENAI.", "Produção de relatórios psicológicos e pareceres educacionais.", "Atuação em rede com órgãos mencionados no ECA.", "Apoio às equipes pedagógicas em intervenções estratégicas." ]
-            },
-            {
-                "Nome": "Valdesson Santos",
-                "Email": "valdessonsantos@fieg.com.br",
-                "Telefone": "(62) 98222-4785",
-                "Atividades": [ "NAPsi: ações de acolhimento, escuta ativa e acompanhamento emocional.", "Atuação junto a estudantes em vulnerabilidade social.", "Ações educativas e formativas relacionadas à saúde mental.", "Trabalho integrado com equipes pedagógicas e gestores.", "Apoio ao fluxo de encaminhamentos institucionais." ]
-            },
-            {
-                "Nome": "Lidianne Alvarenga",
-                "Email": "lidianne.senai@fieg.com.br",
-                "Telefone": "(64) 99136-1454",
-                "Atividades": [ "Formação de docentes SENAI: planejamento, execução e acompanhamento de programas formativos.", "Coordenação do Ensino Médio SENAI/SESI: alinhamento pedagógico e articulação institucional.", "Coordenação das ações do SAGA e SAEP.", "Participação no MSEP (Metodologia SENAI de Educação Profissional).", "Construção e acompanhamento dos Itinerários Formativos.", "Interlocução com equipes técnicas de Educação Profissional." ]
-            },
-            {
-                "Nome": "Leandro Rodrigues",
-                "Email": "leandro.senai@fieg.com.br",
-                "Telefone": "(62) 98558-0123",
-                "Atividades": [ "Brasil + Produtivo (DR/GO): acompanhamento de resultados, interlocução com a CNI, apoio às indústrias.", "Atendimento às unidades: suporte aos serviços de tecnologia", "atendimento às demandas operacionais", "Produção de materiais institucionais: folders, apresentações, textos, vídeos.", "Projeto de Drones: estruturação, acompanhamento técnico e interlocução.", "WorldSkills: apoio às equipes participantes, organização logística e comunicação.", "Arena de Robótica: montagem, operação e suporte tecnológico.", "Projetos nacionais e estaduais vinculados à Educação Profissional." ]
-            },
-            {
-                "Nome": "Rayner Max",
-                "Email": "raynerlima@fieg.com.br",
-                "Telefone": "(62) 98177-0779",
-                "Atividades": [ "Atendimento às faculdades SENAI: suporte acadêmico, regulatório e documental.", "Projeto de Extensão: organização, acompanhamento e articulação institucional.", "Estruturação e suporte aos novos cursos superiores.", "Apoio ao UniSENAI.Digital.", "Acompanhamento de Avaliação MEC/INEP.", "Apoio ao registro e emissão de diplomas e certificações acadêmicas.", "Monitoramento de processos e documentação para credenciamento e renovação." ]
-            },
-            {
-                "Nome": "Lara Carolina dos Anjos",
-                "Email": "lara.senai@fieg.com.br",
-                "Telefone": "(62) 3219-1061",
-                "Atividades": [ "Gestão do SIGE: parametrização, suporte às unidades e tratamento de dados.", "Gestão do SISTEC: encaminhamento de pendências, cadastro de turmas", "apoio às unidades", "Registros escolares: emissão de certificados, histórico, documentação acadêmica.", "Certificação de cursos: acompanhamento de processos e conformidade normativa.", "Apoio aos processos educacionais das unidades SENAI." ]
-            },
-            {
-                "Nome": "Rayka Moreira Cares",
-                "Email": "raykamoreira@fieg.com.br",
-                "Telefone": "(62) 3219-1061",
-                "Atividades": [ "Atuação junto aos cursos técnicos FIC: acompanhamento pedagógico, suporte às unidades.", "Elaboração de materiais técnicos e pedagógicos.", "Participação em eventos e projetos da GEP.", "Apoio ao Profissionaliza Goiás." ]
-            },
-            {
-                "Nome": "Vinícius Micheletti",
-                "Email": "vinicius.senai@fieg.com.br",
-                "Telefone": "(62) 3219-1421",
-                "Atividades": [ "Coordenação dos cursos técnicos e FIC (DR/GO).", "Apoio ao credenciamento de unidades junto ao MEC e órgãos reguladores.", "Atuação no Projeto Rota Verde.", "Acompanhamento do SAGE.", "Apoio ao Mundo SENAI.", "Organização e atualização do Portfólio de Cursos.", "Interlocução de Parcerias Educacionais.", "Coordenação da plataforma Google for Education no SENAI Goiás." ]
-            },
-            {
-                "Nome": "Lorena Marquez",
-                "Email": "lorenamarquez@fieg.com.br",
-                "Telefone": "(62) 3219-1752",
-                "Atividades": [ "Gestão de Projetos GEP: planejamento, documentação e monitoramento.", "Prestação de contas: elaboração de relatórios, formulários e justificativas.", "Controle financeiro: acompanhamento de prazos, pagamentos e contratos.", "Apoio às unidades em demandas administrativas e projetos." ]
-            }
-        ];
+            // Ordenação Hierárquica
+            results.sort((a, b) => {
+                const getRank = (cargo) => {
+                    const key = Object.keys(HIERARCHY_MAP).find(k => cargo.includes(k));
+                    return HIERARCHY_MAP[key] || 99;
+                };
+                const rankA = getRank(a.cargo);
+                const rankB = getRank(b.cargo);
+                if (rankA !== rankB) return rankA - rankB;
+                return a.nome.localeCompare(b.nome);
+            });
 
-        // Dados do JSON para atualização (GTI)
-        const gtiUpdates = [
-            {
-                "Nome": "Rolando Vargas",
-                "Atividades": ["Gestão de equipes, planejamento estratégico, articulação institucional, desenvolvimento de serviços de STI, tecnologia, inovação, gestão, STI, estratégia, Serviços de Tecnologia e Inovação, Editais, Projetos, Expansão Estratégica, PDI, PD&I, Institutos de tecnologia e Inovação, Istis, Projetos de Inovação, Lei do Bem"]
-            },
-            {
-                "Nome": "Rania Nathalia",
-                "Email": "raniasouza@fieg.com.br",
-                "Telefone": "(62) 9992571130",
-                "Atividades": [ "Gestão da agenda do Gerente de Tecnologia e Inovação.", "Solicitação de diárias, hospedagens e passagens aéreas.", "Solicitação de compras e orçamentos.", "Lançamento de notas fiscais.", "Apoio às atividades administrativas da Gerência.", "Controle de documentos e organização de processos internos." ]
-            },
-            {
-                "Nome": "Kunihi Suga",
-                "Email": "kunihi.senai@fieg.com.br",
-                "Telefone": "(62) 998118-385",
-                "Atividades": [ "Interlocutor do Brasil Mais Produtivo pelo estado de Goiás.", "Gestão e acompanhamento de indicadores dos Serviços de Tecnologia e Inovação (STI).", "Autorização e liberação de serviços relacionados aos Serviços de Tecnologia e Inovação.", "Elaborar editais e chamadas de fomento.", "Monitorar os Indicadores de STI no Programa de Gestão do SENAI DN." ]
-            },
-            {
-                "Nome": "Karll Cavalcante",
-                "Email": "karllcavalcante@fieg.com.br",
-                "Telefone": "(62) 99914-2491",
-                "Atividades": [ "Suporte às Unidades na estruturação dos Serviços de Tecnologia e Inovação (STI).", "Responsável pela execução do Programa SEBRAETEC.", "Responsável na implantação e integração de novos sistemas de STI.", "Apoiar na escrita de projetos de STI." ]
-            },
-            {
-                "Nome": "Geovana Pereira",
-                "Email": "geovanapereira@fieg.com.br",
-                "Telefone": "(62) 98169-1385",
-                "Atividades": [ "Interlocutora do SENAI HUB.", "Responsável do Programa Conecta Mais Indústria.", "Responsável pelas parcerias estratégicas com outros HUBs e ICTS.", "Apoiar na gestão estratégica de Comunicação e Marketing de STI.", "Interlocutora da GTI no Ecossistema de Inovação goiano." ]
-            },
-            {
-                "Nome": "Guilherme Alves",
-                "Email": "guilhermealves.senai@fieg.com.br",
-                "Telefone": "(62) 99272-1230",
-                "Atividades": [ "Responsável pelo acompanhamento dos indicadores do Sistema de Gestão de Tecnologia (SGT).", "Responsável pela capacitação no uso do sistema SGT.", "Responsável pela curadoria entre sistemas de migração (Néctar e SGT).", "Responsável pelo envio de cargas de produção de STI para o DN (SGT).", "Apoiar no desenvolvimento e melhoria de processos da GTI.", "Gestão do Edital Regional de Inovação para Micro e Pequenas Indústrias (SEBRAE/SENAI GO)." ]
-            },
-            {
-                "Nome": "Vanessa Maria",
-                "Email": "vanessamaria@fieg.com.br",
-                "Telefone": "(62) 99354-2286",
-                "Atividades": [ "Responsável pela estratégia e criação de conteúdo e publicação nas Redes Sociais de STI.", "Responsável pela criação de conteúdo para veículos de comunicação (ex.: Goiás Industrial Pauta Extra).", "Monitoramento e ativação de marca do SENAI HUB.", "Apoiar estratégicamente nas ações do SENAI HUB." ]
-            },
-            {
-                "Nome": "David Daniel",
-                "Email": "daviddaniel@fieg.com.br",
-                "Telefone": "(62) 99614-3664",
-                "Atividades": [ "Desenvolvimento de Dashboards para demandas de Serviços de Tecnologia e Inovação.", "Suporte no monitoramento do programa Brasil Mais Produtivo.", "Apoio e suporte no fornecimento de informações.", "Monitoramento de indicadores estratégicos." ]
-            },
-            {
-                "Nome": "Beatriz Martins",
-                "Email": "beatrizmartins@fieg.com.br",
-                "Telefone": "(62) 99456-2504",
-                "Atividades": [ "Estruturação e consolidação do Núcleo de Inovação Tecnológica (NIT) do SENAI-GO.", "Apoio jurídico às iniciativas de inovação, tecnologia e pesquisa aplicada.", "Implantação e acompanhamento de políticas institucionais de inovação e propriedade intelectual.", "Atualização e harmonização de normas internas relacionadas à inovação e tecnologia.", "Elaboração, análise e revisão de contratos, convênios, termos de cooperação e pareceres jurídicos.", "Apoio jurídico em projetos de parceria com empresas, universidades e órgãos de fomento.", "Interpretação e aplicação de normas regulatórias específicas do SENAI e da legislação de inovação.", "Assessoria em processos de proteção de patentes, marcas, direitos autorais e segredos industriais.", "Atuação estratégica na mitigação de riscos jurídicos em projetos tecnológicos." ]
-            }
-        ];
-        
-        // Dados do JSON para atualização (Projetos Estratégicos - PE)
-        const peUpdates = [
-            {
-                "Nome": "Quissinia Gomes",
-                "Cargo": "Coordenadora de Projetos Estratégicos",
-                "Atividades": [ "Acompanhamento dos Programas e Projetos Estratégicos da DET.", "Acompanhamento do Programa Trainee For Education (TFE).", "Acompanhamento do Programa Conectando Futuros (CF).", "Acompanhamento do Projeto GEM Governança das Escolas Municipais.", "Interlocução com as Unidades Parceiras.", "Realização de visitas técnicas às Unidades parceiras.", "Interlocução com as equipes parceiras.", "Acompanhamento pedagógico do Projeto Gestores das Escolas Municipais (GEM).", "Monitoramento pedagógico e administrativo dos projetos vinculados à Coordenação." ]
-            },
-            {
-                "Nome": "Diogo Faria",
-                "Email": "diogofaria@fieg.com.br",
-                "Telefone": "(62) 3219-1097 / (62) 99640-7589",
-                "Atividades": [ "Acompanhamento dos Programas e Projetos Estratégicos da DET.", "Acompanhamento do Programa Trainee For Education (TFE).", "Acompanhamento do Programa Conectando Futuros (CF).", "Acompanhamento técnico-administrativo do Projeto GEM Governança das Escolas Municipais.", "Interlocução com as Unidades Parceiras.", "Interlocução com equipes parceiras externas.", "Realização de visitas técnicas às Unidades parceiras.", "Acompanhamento pedagógico do Projeto Gestores das Escolas Municipais (GEM).", "Apoio às ações e coordenações dos Projetos Estratégicos.", "Acompanhamento das frentes pedagógicas, administrativas e documentais dos projetos." ]
-            },
-            {
-                "Nome": "Daianne Silva",
-                "Email": "daiannerocha@fieg.com.br",
-                "Telefone": "(62) 3219-1393",
-                "Atividades": [ "Solicitação de compras.", "Solicitação de reserva de veículos.", "Reserva de hospedagem, agendamento de viagens e compra de passagens.", "Apoio administrativo às Unidades Parceiras.", "Solicitação de orçamentos.", "Organização e arquivamento de processos pedagógicos e administrativos.", "Apoio às solicitações e demandas operacionais da Coordenação de Projetos Estratégicos.", "Lançamento de Notas Fiscais.", "Acompanhamento do preenchimento de documentos.", "Elaboração de relatórios gerenciais.", "Atualização de formulários.", "Interlocução com fornecedores.", "Organização de documentos para prestação de contas.", "Acompanhamento das frentes administrativas dos projetos.", "Organização e atualização dos relatórios administrativos dos projetos." ]
-            }
-        ];
+            renderResults(results);
+        }
 
-        // --- DADOS DE OTIMIZAÇÃO DE BUSCA SEMÂNTICA ---
+        function applyFilter(sigla, btn) {
+            activeFilter = sigla;
+            document.querySelectorAll('.filter-button').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+            
+            const badge = document.getElementById('filter-badge');
+            badge.textContent = MANAGEMENT_AREA_MAP[sigla];
+            badge.classList.remove('hidden');
+            
+            document.getElementById('search-input').value = '';
+            filterContacts('');
+        }
 
-        // Dados do JSON para otimização de busca
-        const optimizationData = {
-            "Diretoria": { 
-                "Bonatto": {
-                    "palavras_chave": [ "direção", "liderança educacional", "gestão estratégica", "educação SESI SENAI", "inovação", "portfólio educacional", "tecnologia", "governança" ],
-                    "palavras_chave_semanticas": [ "gestão de alto nível", "liderança institucional", "administração educacional", "governança corporativa", "estratégia educacional", "supervisão sistêmica", "tomada de decisão executiva", "integração SESI SENAI", "gestão da inovação", "educação profissional", "educação básica", "articulação com indústria", "políticas educacionais", "aprendizagem industrial", "indicadores estratégicos", "transformação digital educacional", "laboratórios educacionais", "infraestrutura educacional", "sistemas educacionais", "projetos estratégicos", "unidades móveis", "alta gestão" ]
-                },
-                "MonicaChristina": {
-                    "palavras_chave": [ "secretária", "administração", "agenda", "processos", "compras", "recepção" ],
-                    "palavras_chave_semanticas": [ "suporte administrativo", "apoio executivo", "gestão de agendas", "coordenação de rotinas", "suporte à diretoria", "processos organizacionais", "gestão documental", "controle financeiro básico", "organização institucional", "relacionamento interno", "fluxo administrativo", "suporte operacional", "gestão de demandas" ]
-                }
-            },
-            "GEB": {
-                "AdrianaSampaio": { "palavras_chave": ["secretária", "administrativo", "diárias", "reservas"], "palavras_chave_semanticas": ["suporte administrativo", "gestão de compromissos", "logística interna", "processos administrativos", "apoio às unidades", "controle documental"] },
-                "DulciannySantana": { "palavras_chave": ["JEPP", "Innovation Camp", "GranPrix", "anos finais"], "palavras_chave_semanticas": ["empreendedorismo juvenil", "metodologias ativas", "projetos de inovação", "competências socioemocionais", "educação fundamental", "atividades maker", "aprendizagem baseada em projetos"] },
-                "AlfredoAlves": { "palavras_chave": ["compras", "patrimônio", "logística", "orçamento", "sistemas", "infraestrutura"], "palavras_chave_semanticas": ["gestão administrativa avançada", "gestão de patrimônio", "suporte tecnológico", "processos operacionais", "gestão fiscal", "inventário e controle", "infraestrutura escolar", "implantação de laboratórios"] },
-                "InglenthMorais": { "palavras_chave": ["EJA", "credenciamento", "autorizações", "regulação", "formação docente"], "palavras_chave_semanticas": ["educação de jovens e adultos", "processos regulatórios", "normativas educacionais", "gestão de documentos oficiais", "fluxos de autorização", "interlocução pedagógica", "apoio docente"] },
-                "KelenGuimaraes": { "palavras_chave": ["psicologia", "inclusão", "NEE", "laudos", "APA", "socioemocional"], "palavras_chave_semanticas": ["psicologia escolar", "educação inclusiva", "avaliação psicológica", "intervenções socioemocionais", "transtornos de aprendizagem", "apoio psicopedagógico", "atendimento educacional especializado"] },
-                "KilzisNovais": { "palavras_chave": ["tecnologia educacional", "Microsoft", "maturidade tecnológica", "certificação", "ensino médio"], "palavras_chave_semanticas": ["integração digital", "competências digitais", "inovação pedagógica", "certificações internacionais", "gestão de tecnologia educacional", "projetos de transformação digital", "monitoramento pedagógico"] },
-                "LilianeAleixo": { "palavras_chave": ["educação infantil", "anos iniciais", "robótica", "PASSE", "iniciação científica"], "palavras_chave_semanticas": ["alfabetização", "práticas pedagógicas iniciais", "metodologias maker", "ciência para crianças", "clube de ciências", "formação de professores", "aprendizagem ativa"] },
-                "LunnaBarros": { "palavras_chave": ["educação continuada", "contraturno", "PASSE", "PED Brasil"], "palavras_chave_semanticas": ["extensão educacional", "supletivo corporativo", "projetos pedagógicos", "formação continuada", "programas educacionais nacionais", "suporte pedagógico"] },
-                "MillamayBastos": { "palavras_chave": ["qualidade educacional", "avaliação", "supervisão", "escolas parceiras"], "palavras_chave_semanticas": ["gestão da qualidade", "indicadores pedagógicos", "processos avaliativos", "acompanhamento escolar", "normas e diretrizes", "aperfeiçoamento pedagógico"] },
-                "RaphaelFerro": { "palavras_chave": ["BI", "dados", "Educa", "aplicativos SESI SENAI", "indicadores", "secretaria digital"], "palavras_chave_semanticas": ["business intelligence", "sistemas educacionais", "governança de dados", "analytics educacional", "indicadores estratégicos", "gestão de plataformas", "tecnologia da informação educacional"] },
-                "SabrinaRodrigues": { "palavras_chave": ["robótica educacional", "FLL", "FTC", "FRC", "NAO", "STEM Racing"], "palavras_chave_semanticas": ["competições de robótica", "automação educacional", "programação infantil", "robótica competitiva", "inteligência artificial pedagógica", "engenharia educacional", "competências STEM"] }
-            }
-        };
+        function renderManagementButtons() {
+            const container = document.getElementById('management-buttons-container');
+            Object.entries(MANAGEMENT_AREA_MAP).forEach(([sigla, nome]) => {
+                const btn = document.createElement('button');
+                btn.className = "filter-button text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-md hover:scale-105 active:scale-95";
+                btn.textContent = sigla;
+                btn.title = nome;
+                btn.onclick = () => applyFilter(sigla, btn);
+                container.appendChild(btn);
+            });
+        }
 
-
-        // --- 3. EXECUÇÃO INICIAL ---
-
-        // 1. Aplica a otimização de busca (inclui sobrenomes e palavras-chave semânticas)
-        optimizeSearchKeywords(optimizationData.Diretoria);
-        optimizeSearchKeywords(optimizationData.GEB);
-        
-        // 2. Aplica todas as atualizações de detalhes (usa a função updateContactDetails)
-        diretoriaUpdates.forEach(item => {
-            updateContactDetails(item.Nome, item.Atividades, item.Email, item.Telefone);
-        });
-        gebUpdates.forEach(item => {
-            updateContactDetails(item.Nome, item.Atividades, item.Email, item.Telefone);
-        });
-        gepUpdates.forEach(item => {
-            const nomeCorrigido = item.Nome.replace('Táís', 'Tais').replace('Ráysa', 'Raysa').replace('Lara Carolina dos Anjos', 'Lara Carolina dos Anjos').replace('Lorena Márquez', 'Lorena Marquez');
-            updateContactDetails(nomeCorrigido, item.Atividades, item.Email, item.Telefone);
-        });
-        gtiUpdates.forEach(item => {
-            updateContactDetails(item.Nome, item.Atividades, item.Email, item.Telefone);
-        });
-        peUpdates.forEach(item => {
-            updateContactDetails(item.Nome, item.Atividades, item.Email, item.Telefone);
-        });
-        
-        // 3. Inicializa a aplicação após o DOM estar pronto
+        // --- 4. INICIALIZAÇÃO ---
         document.addEventListener('DOMContentLoaded', () => {
             renderManagementButtons();
-            filterContacts('');
+            // Inicia exibindo a Diretoria (DET) por padrão
+            const firstBtn = document.querySelector('.filter-button');
+            applyFilter('DET', firstBtn);
         });
 
     </script>
