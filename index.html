@@ -3,338 +3,543 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Quadro de colaboradores da Diretoria de Educação e Tecnologia - SESI SENAI Goiás">
-    <title>Quem é Quem DET - SESI SENAI</title>
-    
-    <!-- Tailwind CSS -->
+    <title>Quem é Quem - DET SESI SENAI GO</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; overflow-x: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); }
+        .card-transition { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .card-transition:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 25px 50px -12px rgba(0, 74, 142, 0.15); }
+        .sesi-bg-blue { background-color: #004a8e; }
+        .senai-bg-red { background-color: #e30613; }
+        input::placeholder { color: #94a3b8; }
         
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-            color: #1e293b;
-        }
-
-        .contact-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .contact-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        .filter-button {
-            background-color: #3b82f6;
-            transition: all 0.2s;
-        }
-
-        .filter-button:hover {
-            background-color: #2563eb;
-            transform: translateY(-1px);
-        }
-
-        .filter-button.active {
-            background-color: #1e3a8a; 
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.4);
+        .modal-enter-active { animation: modal-in 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+        @keyframes modal-in {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
         
-        .profile-image-container {
-            width: 80px;
-            height: 80px;
-            border: 3px solid #1e3a8a;
-            overflow: hidden;
-            border-radius: 9999px;
-            background-color: #e2e8f0;
-        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        .profile-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .detail-button {
-            background-color: #f1f5f9;
-            color: #1e3a8a;
-            border: 1px solid #e2e8f0;
-            transition: all 0.2s;
-        }
-
-        .detail-button:hover {
-            background-color: #e2e8f0;
-        }
-        
-        .detail-list {
-            list-style: disc;
-            margin-left: 1.25rem;
-            color: #475569;
-        }
-        
-        .detail-list li {
-            margin-bottom: 0.35rem;
-            font-size: 0.875rem;
-            line-height: 1.25rem;
+        .header-gradient {
+            background: linear-gradient(135deg, #004a8e 0%, #003366 100%);
         }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body>
+    <div id="root"></div>
 
-    <div id="app" class="max-w-6xl mx-auto">
-        
-        <!-- Cabeçalho -->
-        <header class="text-center mb-10">
-            <div class="mb-6 inline-block p-4 bg-white rounded-2xl shadow-sm">
-                <img src="https://i.postimg.cc/RZ7Shjmy/DET_-_azul.png" alt="Logo DET" class="mx-auto h-12 md:h-16 object-contain">
-            </div>
-            <h1 class="text-4xl md:text-5xl font-extrabold text-blue-900 tracking-tight">
-                Quem é Quem DET
-            </h1>
-            <p class="mt-3 text-lg text-slate-500 font-medium">Diretoria de Educação e Tecnologia - SESI SENAI Goiás</p>
-        </header>
-        
-        <!-- Filtros por Gerência -->
-        <div class="mb-8 p-6 bg-white rounded-3xl shadow-sm border border-slate-100">
-            <h2 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4 flex items-center">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
-                Filtrar por Gerência / Coordenação
-            </h2>
-            <div id="management-buttons-container" class="flex flex-wrap gap-2">
-                <!-- Injetado via JS -->
-            </div>
-        </div>
+    <script type="text/babel">
+        const { useState, useMemo } = React;
 
-        <!-- Campo de Busca Dinâmico -->
-        <div class="mb-10 group">
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-                    <svg class="h-6 w-6 text-slate-400 group-focus-within:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                </div>
-                <input 
-                    type="text" 
-                    id="search-input" 
-                    placeholder="Quem é responsável por BI? / Procure por nome, cargo ou palavra-chave..." 
-                    class="w-full pl-14 pr-6 py-5 bg-white rounded-3xl shadow-lg border-none focus:ring-4 focus:ring-blue-500/10 text-xl transition-all placeholder-slate-400"
-                    onkeyup="filterContacts(this.value)"
-                />
-            </div>
-        </div>
-
-        <!-- Resultados -->
-        <section>
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold text-slate-800" id="results-title">Profissionais Encontrados (0)</h2>
-                <div id="filter-badge" class="hidden px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider"></div>
-            </div>
-            
-            <div id="results-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Cards injetados aqui -->
-            </div>
-        </section>
-
-    </div>
-
-    <script>
-        // --- DATA DE CARGOS E HIERARQUIA ---
-        const HIERARCHY_MAP = {
-            "Diretor de Educação e Tecnologia": 1,
-            "Gerente de Educação Básica e Continuada": 2, "Gerente de Educação Profissional e Superior": 2, "Gerente de Tecnologia e Inovação": 2,
-            "Coordenadora de Projetos Estratégicos": 3, "Coordenador de Recursos Tecnológicos e Inteligência Educacional": 3, "Coordenador das Unidades Móveis DR/GO": 3, "Assessora Técnica Educacional": 3, "Assessor Técnico Educacional": 3,
-            "Analista IV": 4, "Analista III": 5, "Analista II": 6, "Analista de Educação": 6, "Psicólogo Educacional": 6,
-            "Secretária do Diretor": 7, "Secretária": 7, "Assistente Administrativo": 8, "Estagiário": 9
-        };
-
-        const MANAGEMENT_AREA_MAP = {
-            "DET": "Diretoria", "GEB": "Educação Básica", "GEP": "Educação Profissional",
-            "GTI": "Tecnologia e Inovação", "PE": "Projetos Estratégicos",
-            "CRTI": "Recursos e Inteligência", "CMOV": "Unidades Móveis"
-        };
-
-        // --- BASE DE DADOS DOS CONTATOS ---
-        let contacts = [
-            { id: 1, area: "DET", nome: "Claudemir José Bonatto", cargo: "Diretor de Educação e Tecnologia", email: "bonatto@fieg.com.br", telefone: "(62) 3219-1701", whatsapp: "(62) 99866-1243", resumo: "Responsável pela direção estratégica e operacional da DET.", palavras: "Professor Bonatto, DET, Direção, Gestão, SESI, SENAI", image_url: "https://i.postimg.cc/L6BfX1JS/Bonatto.png", atividades: ["Direção integrada de Educação e Tecnologia.", "Orientação estratégica de SESI e SENAI Goiás.", "Alinhamento institucional e parcerias indústrias."] },
-            { id: 2, area: "DET", nome: "Mônica Christina", cargo: "Secretária do Diretor", email: "monica.senai@fieg.com.br", telefone: "(62) 3219-1702", whatsapp: "(62) 98427-6298", resumo: "Secretária executiva da Diretoria de Educação e Tecnologia.", palavras: "Christina, Souza, Agenda, Suporte Diretoria, Notas Fiscais", image_url: "https://i.postimg.cc/qB8sSYXC/Monica.png", atividades: ["Gestão de agenda do Diretor.", "Atendimento telefônico e recepção.", "Lançamento de notas fiscais e suporte documental."] },
-            
-            // GEB
-            { id: 3, area: "GEB", nome: "Diego Freire", cargo: "Gerente de Educação Básica e Continuada", email: "diegofreire@fieg.com.br", telefone: "(62) 3219-1328", resumo: "Gestão da educação básica e continuada SESI.", palavras: "Gerente GEB, Educação SESI, Diego Freire", image_url: "https://i.postimg.cc/pTzr6wjQ/Diego-Freire.png", atividades: ["Gestão pedagógica.", "Liderança de equipes GEB.", "Planejamento estratégico de ensino."] },
-            { id: 4, area: "GEB", nome: "Adriana Sampaio", cargo: "Secretária", email: "adriana@fieg.com.br", telefone: "(62) 3219-1328", resumo: "Suporte administrativo à Gerência de Educação Básica.", palavras: "Secretária Diego, GEB, Reservas, Diárias", image_url: "https://i.postimg.cc/FsQs7CL8/Adriana.png", atividades: ["Reserva de veículos e salas.", "Solicitações de diárias e passagens.", "Apoio administrativo."] },
-            { id: 5, area: "GEB", nome: "Alfredo Alves", cargo: "Analista Administrativo", email: "alfredo@fieg.com.br", telefone: "(62) 3219-1302", resumo: "Gestão integrada de aquisições e infraestrutura tecnológica.", palavras: "Compras SESI, Cotação, Patrimônio, Robótica, Protheus", image_url: "https://i.postimg.cc/5tJwgSDt/Alfredo.png", atividades: ["Processos de compras e contratos.", "Gestão de patrimônio.", "Operacionalização de sistemas SORS e Protheus."] },
-            { id: 6, area: "GEB", nome: "Raphael Ferro", cargo: "Analista de Educação", email: "raphaelferro@fieg.com.br", telefone: "3219-1735", resumo: "Responsável por dados, BI e indicadores da GEB.", palavras: "BI SESI, Dados, Dashboards, SCAE, Digit.all, Qlik Sense", image_url: "https://i.postimg.cc/NG4y1wkC/Raphael.png", atividades: ["Criação de Dashboards BI.", "Ponto focal Educa.", "Sistema de gestão SCAE."] },
-            
-            // GEP
-            { id: 7, area: "GEP", nome: "Osvair Matos", cargo: "Gerente de Educação Profissional e Superior", email: "osvair@fieg.com.br", telefone: "(62) 3219-1718", resumo: "Gestão da educação profissional e ensino superior SENAI.", palavras: "Gerente GEP, SENAI, Educação Profissional", image_url: "https://i.postimg.cc/3J1gJvqh/Osvair-Matos.png", atividades: ["Liderança GEP.", "Articulação institucional SENAI."] },
-            { id: 8, area: "GEP", nome: "Rayka Moreira Cares", cargo: "Analista II", email: "raykamoreira@fieg.com.br", telefone: "(62) 3219-1061", resumo: "Coordenação pedagógica FIC, Inclusão e Formação Docente.", palavras: "FIC, Inclusão, PSAI, FIMTPODER, Profissionaliza, Contrate-me, Jornada Pedagógica, Ações Inclusivas, Madrinha", image_url: "https://i.postimg.cc/kgVB3R3x/Rayka-Sousa.png", atividades: ["Coordenação pedagógica de cursos técnicos e FIC.", "Gestão de ações inclusivas (PSAI).", "Coordenação da Jornada Pedagógica Nacional.", "Apoio ao programa Profissionaliza Goiás e Contrate-me."] },
-            { id: 9, area: "GEP", nome: "Taís Moreira", cargo: "Assessora Técnica Educacional", email: "taisrodrigues.senai@fieg.com.br", telefone: "(62) 3219-1346", resumo: "Coordenação do Programa Profissionaliza Goiás.", palavras: "SEDUC, Profissionaliza Goiás, Itinerários", image_url: "https://i.postimg.cc/dtyzbJNL/Tais-Moreira.png", atividades: ["Interlocução com SEDUC.", "Implementação de itinerários formativos."] },
-
-            // GTI
-            { id: 10, area: "GTI", nome: "Rolando Vargas", cargo: "Gerente de Tecnologia e Inovação", email: "rolandovargas@fieg.com.br", telefone: "(62) 3219-1498", resumo: "Gestão de serviços de tecnologia e inovação.", palavras: "GTI, ISTIs, Zeiss, Inovação, SENAI", image_url: "https://i.postimg.cc/vmhR0X2Y/Rolando.png", atividades: ["Gestão estratégica dos Institutos SENAI.", "Projetos de Inovação e Lei do Bem."] },
-            { id: 11, area: "GTI", nome: "David Daniel", cargo: "Estagiário", email: "daviddaniel@fieg.com.br", telefone: "(62) 99614-3664", resumo: "Desenvolvimento de dashboards e monitoramento de indicadores STI.", palavras: "BI, Dashboards, SGT, Dados STI, David", image_url: "https://i.postimg.cc/t4414m00/David-Daniel.jpg", atividades: ["Desenvolvimento de Dashboards para GTI.", "Suporte ao programa Brasil Mais Produtivo."] },
-            
-            // CRTI
-            { id: 12, area: "CRTI", nome: "Pedro Henrique", cargo: "Coordenador de Recursos Tecnológicos e Inteligência Educacional", email: "pedrohcn.senai@fieg.com.br", telefone: "(62) 3219-1493", resumo: "Gestão de recursos tecnológicos e inteligência de dados.", palavras: "Inteligência Educacional, Dados, IA Educação, Padronização", image_url: "https://i.postimg.cc/FR0StdSq/Pedro.png", atividades: ["Coordenação da aquisição de tecnologias.", "Gestão de dados e estatísticas educacionais."] },
-            { id: 13, area: "CRTI", nome: "Antonio Balduino Neto", cargo: "Analista de Inteligência de Dados", email: "antoniobsn.senai@fieg.com.br", telefone: "(62) 3219-2817", resumo: "Especialista em Inteligência de Dados e IA.", palavras: "Foresight, IA, Assistentes Virtuais, OKRs, Antonio Neto, BI", image_url: "https://i.postimg.cc/mrdyrF64/Antonio-Neto.png", atividades: ["Criação de Assistentes de IA.", "Estudos prospectivos (Foresight).", "Monitoramento de KPIs estratégicos."] }
-            
-            // ... Demais colaboradores mapeados anteriormente seguem aqui no mesmo padrão
+        // =========================================================
+        // 1. BASE DE DADOS INTEGRAL
+        // =========================================================
+        const LISTA_COLABORADORES = [
+            // --- DET ---
+            { 
+                nome: "Claudemir José Bonatto", nickname: "Professor Bonatto", cargo: "Diretor de Educação e Tecnologia", area: "DET", email: "bonatto@fieg.com.br", whatsapp: "(62) 99866-1243", foto: "https://i.postimg.cc/L6BfX1JS/Bonatto.png",
+                resumo: "Líder estratégico responsável pela condução das políticas de educação e tecnologia do SESI e SENAI em Goiás, focando na integração entre as demandas industriais e a formação de excelência.",
+                atividades: ["Gestão estratégica da DET", "Representação institucional", "Liderança corporativa"] 
+            },
+            { 
+                nome: "Mônica Christina", cargo: "Secretária", area: "DET", email: "monica.senai@fieg.com.br", whatsapp: "(62) 98427-6298", foto: "https://i.postimg.cc/qB8sSYXC/Mônica.png",
+                resumo: "Ponto focal administrativo da diretoria, gerencia agendas complexas, fluxos documentais e apoia a coordenação orçamentária para garantir a eficiência operacional da alta gestão.",
+                atividades: ["Gestão de agenda", "Atendimento administrativo", "Solicitação de viagens", "Monitoramento orçamentário", "Apoio às secretárias das Gerências"] 
+            },
+            // --- GEB ---
+            { 
+                nome: "Diego Freire", cargo: "Gerente de Educação Básica e Continuada", area: "GEB", email: "diegofreire@fieg.com.br", whatsapp: "(62) 99997-0069", foto: "https://i.postimg.cc/pTzr6wjQ/Diego_Freire.png",
+                resumo: "Coordena a rede de escolas SESI, focando na inovação pedagógica e na expansão da educação continuada para elevar os padrões de aprendizagem em todo o estado.",
+                atividades: ["Gestão da Educação Básica e Continuada", "Monitoramento regional SESI", "Coordenação estratégica GEB"] 
+            },
+            { 
+                nome: "Adriana Sampaio", cargo: "Secretária", area: "GEB", email: "adriana@fieg.com.br", whatsapp: "(62) 99962-1696", foto: "https://i.postimg.cc/FsQs7CL8/Adriana.png",
+                resumo: "Responsável pelo suporte administrativo direto à Gerência de Educação Básica, gerenciando agendas, viagens e processos de compras para garantir o fluxo de trabalho da equipe.",
+                atividades: ["Gestão de Agenda do Gerente", "Reserva de veículos e ambientes", "Solicitações de diárias e passagens", "Lançamento de Notas Fiscais"] 
+            },
+            { 
+                nome: "Dulcianny Santana", cargo: "Analista de Educação", area: "GEB", email: "dulcianny.sesi@fieg.com.br", whatsapp: "(62) 999182-6146", foto: "https://i.postimg.cc/m2YLW3ts/Dulcyane.png",
+                resumo: "Especialista em projetos de inovação para os anos finais do Ensino Fundamental, liderando maratonas de criatividade e programas de empreendedorismo como o JEPP.",
+                atividades: ["Projeto JEPP (6º ao 9º ano)", "Innovation Camp", "SESI Gran Prix", "Redação Nota 1000"] 
+            },
+            { 
+                nome: "Alfredo Alves", cargo: "Analista Administrativo", area: "GEB", email: "alfredo@fieg.com.br", whatsapp: "(61) 98127-6685", foto: "https://i.postimg.cc/5tJwgSDt/Alfredo.png",
+                resumo: "Gestor operacional de infraestrutura tecnológica e compras para o SESI, assegurando a conformidade fiscal e o suporte logístico aos laboratórios de robótica.",
+                atividades: ["Conduzir processos de compras", "Gerir o patrimônio e inventário", "Logística de distribuição de equipamentos", "Apoio operacional ao SENAI Lab"] 
+            },
+            { 
+                nome: "Inglenth Morais", cargo: "Analista de Educação", area: "GEB", email: "inglenthmorais.sesi@fieg.com.br", whatsapp: "(62) 3219-1753", foto: "https://i.postimg.cc/dQRpq5mn/Inglenth.png",
+                resumo: "Coordenadora do Núcleo de Formação Docente e interlocutora regional da EJA, focada no projeto SEJA PRO+ e no credenciamento de novas unidades escolares.",
+                atividades: ["Interlocutora Educação de Jovens e Adultos", "Credenciamento e Autorizações", "Núcleo de Formação Docente e Mentoria"] 
+            },
+            { 
+                nome: "Kelen Guimarães", cargo: "Analista de Educação", area: "GEB", email: "kelen.sesi@fieg.com.br", whatsapp: "(62) 3219-1012", foto: "https://i.postimg.cc/6qYNTcRj/Kellen.jpg",
+                resumo: "Responsável pelo Núcleo de Psicologia e Educação Inclusiva, coordena o atendimento especializado e programas socioemocionais em todas as etapas de ensino do SESI.",
+                atividades: ["Programa Socioemocional Lekto", "Atendimento Educacional Especializado (AEE)", "Ações Inclusivas", "Programa Doe Sangue, Doe Vida"] 
+            },
+            { 
+                nome: "Kilzis Novais", cargo: "Analista de Educação", area: "GEB", email: "kilzissterfany@fieg.com.br", whatsapp: "(62) 99261-5187", foto: "https://i.postimg.cc/bNVhh6qd/Kilzis.png",
+                resumo: "Lidera a transformação digital nas escolas através da Certificação Microsoft e do projeto de Maturidade Tecnológica, além de acompanhar o desempenho no ENEM.",
+                atividades: ["Certificação Escolas Show Case", "Projeto de Maturidade Tecnológica", "Projeto Encantar para Avançar (Ensino Médio/ENEM)"] 
+            },
+            { 
+                nome: "Liliane Aleixo", cargo: "Analista de Educação", area: "GEB", email: "liliane.sesi@fieg.com.br", whatsapp: "(62) 98147-0174", foto: "https://i.postimg.cc/N0wPqT2c/Liliane.png",
+                resumo: "Especialista em Educação Infantil e robótica educacional, coordena parcerias estratégicas para ampliação da rede SESI e acompanhamento técnico pedagógico.",
+                atividades: ["Iniciação Científica e Clubes de Ciências", "Projeto Escolas Novas", "Apoio Pedagógico PASSE", "Projeto Jogar mais Aprender (SESCOOP)"] 
+            },
+            { 
+                nome: "Lunna Barros", cargo: "Analista de Educação", area: "GEB", email: "lunna@fieg.com.br", whatsapp: "(62) 99228-0923", foto: "https://i.postimg.cc/JzTcKk3K/Lunna.jpg",
+                resumo: "Gestora de Educação Continuada, focada em soluções corporativas e programas de especialização docente como o PED Brasil e o sistema de avaliação PASSE.",
+                atividades: ["Responsável Educação Continuada", "PED Brasil (Especialização Docente)", "Sistema de Avaliação PASSE"] 
+            },
+            { 
+                nome: "Millamay Bastos", cargo: "Analista de Educação", area: "GEB", email: "millamayalice.sesi@fieg.com.br", whatsapp: "(62) 98214-3498", foto: "https://i.postimg.cc/V6tqYZxg/Millamay.png",
+                resumo: "Atua na garantia da qualidade e acompanhamento pedagógico das escolas parceiras, definindo diretrizes avaliativas para o sistema SESI em Goiás.",
+                atividades: ["Qualidade e Acompanhamento Pedagógico", "Diretrizes do Sistema Avaliativo", "Monitoramento de Escolas Parceiras"] 
+            },
+            { 
+                nome: "Raphael Ferro", cargo: "Analista de Educação", area: "GEB", email: "raphaelferro@fieg.com.br", whatsapp: "(62) 98113-5651", foto: "https://i.postimg.cc/NG4y1wkC/Raphael.png",
+                resumo: "Ponto focal de inteligência de dados para a Educação Básica, desenvolve dashboards de acompanhamento e gerencia o Portal SESI e a Secretaria Digital.",
+                atividades: ["Gestão do BI SESI", "App SESI SENAI Digital", "Sistema de Gestão Escolar (SCAE)", "Indicadores Estratégicos"] 
+            },
+            { 
+                nome: "Sabrina Rodrigues", cargo: "Analista de Educação", area: "GEB", email: "sabrinarodrigues@fieg.com.br", whatsapp: "(62) 3219-1043", foto: "https://i.postimg.cc/T1yZYxRZ/Sabrina.png",
+                resumo: "Referência técnica em Robótica e Programação, coordena as competições FIRST e projetos de biônica e humanoides como o Robô NAO.",
+                atividades: ["FIRST LEGO League (FLL/FTC/FRC)", "Stem Racing", "Robô NAO Humanoide", "Gestão de Bionic's"] 
+            },
+            // --- GEP ---
+            { 
+                nome: "Osvair Matos", cargo: "Gerente de Educação Profissional e Superior", area: "GEP", email: "osvair@fieg.com.br", whatsapp: "(62) 99812-9353", foto: "https://i.postimg.cc/3J1gJvqh/Osvair_Matos.png",
+                resumo: "Líder estratégia do ensino técnico e superior no SENAI Goiás, integrando a formação profissional às inovações do mercado industrial e tecnológico.",
+                atividades: ["Gestão da Educação Profissional e Ensino Superior", "Interlocução Nacional SENAI", "Coordenação GEP"] 
+            },
+            { 
+                nome: "Leandro Rodrigues", cargo: "Analista de Educação", area: "GEP", email: "leandro.senai@fieg.com.br", whatsapp: "(62) 98558-0123", foto: "https://i.postimg.cc/pTCSBTTy/Leandro.png",
+                resumo: "Responsável pela interlocução nacional em programas de produtividade e qualidade, coordenando eventos de grande porte como o Mundo SENAI e a WorldSkills.",
+                atividades: ["Programa Brasil + Produtivo", "Avaliação WorldSkills", "Evento Mundo SENAI", "Produção de Materiais DET"] 
+            },
+            { 
+                nome: "Luciane Balduino", cargo: "Assessora Técnica Educacional", area: "GEP", email: "luciane.senai@fieg.com.br", whatsapp: "(62) 98125-4345", foto: "https://i.postimg.cc/25wGstf1/Luciane.png",
+                resumo: "Assessora técnica focada na regulação do ensino superior perante o MEC e INEP, gerenciando o registro de diplomas e a implementação do AVA SENAI.",
+                atividades: ["Gestão de Graduação e Pós-graduação", "Interlocutora MEC/INEP", "Núcleo de Registro de Diplomas", "Sistema AVA SENAI"] 
+            },
+            { 
+                nome: "Rayner Max", cargo: "Assessor Técnico Educacional", area: "GEP", email: "raynerlima@fieg.com.br", whatsapp: "(62) 98177-0779", foto: "https://i.postimg.cc/MHNJyTPf/Rayner.png",
+                resumo: "Foca na internacionalização do ensino superior e na implementação de diretrizes de ensino digital via UniSENAI.Digital para as faculdades do SENAI Goiás.",
+                atividades: ["Internacionalização SENAI", "UniSENAI Digital", "Regulação Ensino Superior", "Parcerias Acadêmicas"] 
+            },
+            { 
+                nome: "Vinícius Micheletti", cargo: "Assessor Técnico Educacional", area: "GEP", email: "vinicius.senai@fieg.com.br", whatsapp: "(62) 98346-7677", foto: "https://i.postimg.cc/P5hTKLf2/Vinícius.png",
+                resumo: "Coordena a modalidade de cursos técnicos e projetos industriais estratégicos, como a parceria John Deere (Projeto Rota Verde) e o sistema SAGE.",
+                atividades: ["Projeto Rota Verde (John Deere)", "Habilitação Técnica SENAI", "Sistema SAGE", "Plataforma Google for Education"] 
+            },
+            { 
+                nome: "Taís Moreira", cargo: "Assessor Técnico Educacional", area: "GEP", email: "taisrodrigues.senai@fieg.com.br", whatsapp: "(62) 98128-2147", foto: "https://i.postimg.cc/dtyzbJNL/Taís_Moreira.png",
+                resumo: "Principal interface entre o SENAI e a SEDUC, coordenando o programa Profissionaliza Goiás e a implementação dos novos itinerários de formação técnica.",
+                atividades: ["Programa Profissionaliza Goiás", "Interface SEDUC", "Itinerários de Formação Técnica", "Apoio Pedagógico às Unidades"] 
+            },
+            { 
+                nome: "Lidianne Alvarenga", cargo: "Assessor Técnico Educacional", area: "GEP", email: "lidianne.senai@fieg.com.br", whatsapp: "(64) 99136-1454", foto: "https://i.postimg.cc/RVNYcvzZ/Lidianne.png",
+                resumo: "Especialista em formação docente e Novo Ensino Médio, coordena redes de professores e pesquisas de apropriação pedagógica como o SAEP e MSEP.",
+                atividades: ["Novo Ensino Médio SESI-SENAI", "Formação Continuada de Docentes", "Avaliação SAEP", "Metodologia SAGA"] 
+            },
+            { 
+                nome: "Juliana Cardoso", cargo: "Assessora Técnica Educacional", area: "GEP", email: "julianacardoso@fieg.com.br", whatsapp: "(61) 98200-2181", foto: "https://i.postimg.cc/sxnJMG27/Juliana.png",
+                resumo: "Coordena os programas de aprendizagem industrial e emprepregabilidade, atuando como madrinha de unidades e interlocutora junto a órgãos públicos e Junior Achievement.",
+                atividades: ["Gestão de Aprendizagem Industrial", "Docente TOP 10", "Junior Achievement", "Interlocução SRTE"] 
+            },
+            { 
+                nome: "Jamil Khouri", cargo: "Assessor Técnico Educacional", area: "GEP", email: "jamilcastro@fieg.com.br", whatsapp: "(62) 98119-2112", foto: "https://i.postimg.cc/59mKc6ft/Jamil_Khouri.png",
+                resumo: "Lidera o Núcleo de Apoio Psicossocial (NAPsi) na educação profissional e coordena projetos com ministérios federais e programas como o Qualifica PAC.",
+                atividades: ["Gestão do NAPsi", "Projetos Ministérios (MD/MIDR/MDS)", "Programa Qualifica PAC", "Pesquisa de Egressos"] 
+            },
+            { 
+                nome: "Rayka Sousa", cargo: "Analista II", area: "GEP", email: "raykamoreira@fieg.com.br", whatsapp: "(62) 3219-1061", foto: "https://i.postimg.cc/kgVB3R3x/Rayka_Sousa.png",
+                resumo: "Especialista em ações inclusivas e metodologias ativas, coordena o programa PSAI e a Jornada Pedagógica para promover ambientes acessíveis no SENAI.",
+                atividades: ["Programa de Ações Inclusivas (PSAI)", "Representante FIMTPODER", "Jornada Pedagógica", "Metodologias Ativas"] 
+            },
+            { 
+                nome: "Diorrane Tome de Melo", cargo: "Analista III", area: "GEP", email: "diorrane.senai@fieg.com.br", whatsapp: "(62) 3219-1061", foto: "https://i.postimg.cc/4dkNVW02/Diorrane_Tome.png",
+                resumo: "Apoia a coordenação pedagógica e operacional do projeto Profissionaliza Goiás, focando na implementação técnica dos itinerários formativos com a SEDUC.",
+                atividades: ["Apoio Profissionaliza Goiás", "Itinerários Técnicos", "Coordenação Pedagógica SENAI-SEDUC"] 
+            },
+            { 
+                nome: "Ísis Stefhany", cargo: "Analista II", area: "GEP", email: "isis.sesi@fieg.com.br", whatsapp: "(62) 3219-1393", foto: "https://i.postimg.cc/YSmDTRC6/Ísis_Stefhany.png",
+                resumo: "Analista focada no suporte operacional ao programa Profissionaliza Goiás e na articulação pedagógica entre as unidades do SENAI e a Secretaria de Educação.",
+                atividades: ["Suporte Profissionaliza Goiás", "Implementação de Itinerários", "Apoio às Unidades Operacionais"] 
+            },
+            { 
+                nome: "Lorena Marquez", cargo: "Analista de Educação", area: "GEP", email: "lorenamarquez@fieg.com.br", whatsapp: "(62) 99992-6024", foto: "https://i.postimg.cc/fyFBH0hW/Lorena_Marquez.png",
+                resumo: "Gestora administrativa de projetos nacionais e internacionais, responsável pelo controle financeiro via SGF e monitoramento técnico no sistema SGE.",
+                atividades: ["Gestão de Projetos (IDAP/TOP 10)", "Sistema de Apoio Financeiro (SGF)", "Elaboração de Documentos Técnicos", "Internacionalização"] 
+            },
+            { 
+                nome: "Lara Carolina dos Anjos", cargo: "Analista de Educação", area: "GEP", email: "lara.senai@fieg.com.br", whatsapp: "(62) 3219-1061", foto: "https://i.postimg.cc/mg10GBdY/Lara.png",
+                resumo: "Coordena a gestão de sistemas educacionais e registros acadêmicos, garantindo a conformidade dos padrões de qualidade no SIGE e SISTEC.",
+                atividades: ["Gestão SGE/SIGE", "Autonomia SISTEC", "Registros Acadêmicos e Certificação", "Padronização de Matrículas"] 
+            },
+            { 
+                nome: "Jonathan Aniceto", cargo: "Psicólogo Educacional", area: "GEP", email: "Jonathansilva@fieg.com.br", whatsapp: "(62) 99243-3076", foto: "https://i.postimg.cc/RZ2X1tLp/Jonathan_Aniceto.png",
+                resumo: "Psicólogo do NAPsi focado no mapeamento de vulnerabilidades e suporte socioemocional, conectando o aluno a redes de proteção e saúde mental.",
+                atividades: ["Ações Formativas em Saúde Mental", "Apoio Educacional e Aprendizagem", "Proteção e Cuidado no NAPsi"] 
+            },
+            { 
+                nome: "Valdesson Santos", cargo: "Psicólogo Educacional", area: "GEP", email: "valdessonsantos@fieg.com.br", whatsapp: "(62) 98222-4785", foto: "https://i.postimg.cc/fbwpSmzq/Valdesson_Santos.png",
+                resumo: "Atua no desenvolvimento integral do estudante através do NAPsi, realizando intervenções psicossociais e formações em inclusão para a comunidade escolar.",
+                atividades: ["Psicólogo Educacional NAPsi", "Identificação de Vulnerabilidades", "Suporte Integral ao Aluno"] 
+            },
+            // --- GTI ---
+            { 
+                nome: "Rolando Vargas", nickname: "Professor Rolando", cargo: "Gerente de Tecnologia e Inovação", area: "GTI", email: "rolandovargas@fieg.com.br", whatsapp: "(62) 99827-1072", foto: "https://i.postimg.cc/vmhR0X2Y/Rolando.png",
+                resumo: "Lidera os Institutos SENAI de Tecnologia em Goiás, coordenando projetos de PD&I e parcerias globais de alta tecnologia como a parceria Zeiss.",
+                atividades: ["Gestão da GTI e Institutos (ISTIs)", "Parceria Estratégica Zeiss", "Coordenação de Inovação e Tecnologia"] 
+            },
+            { 
+                nome: "Rania Nathalia", cargo: "Secretária", area: "GTI", email: "raniasouza@fieg.com.br", whatsapp: "(62) 9999257-1130", foto: "https://i.postimg.cc/XqVpT24r/Rania_Nathalia.png",
+                resumo: "Gerencia o suporte administrativo da Gerência de Tecnologia e Inovação, controlando agendas, despesas de viagens e processos de compra da área.",
+                atividades: ["Gerenciamento de Agenda GTI", "Monitoramento Orçamentário", "Gestão de Compras e Viagens", "Lançamento de Notas Fiscais"] 
+            },
+            { 
+                nome: "Kunihi Suga", cargo: "Analista IV", area: "GTI", email: "kunihi.senai@fieg.com.br", whatsapp: "(62) 998118-385", foto: "https://i.postimg.cc/L5yrmXFM/Kunihi_Suga.png",
+                resumo: "Coordenador estratégico de Serviços de Tecnologia e Inovação, responsável por editais de fomento e interlocução do programa Brasil Mais Produtivo.",
+                atividades: ["Interlocutor Brasil Mais Produtivo", "Gestor de Inovação SGF", "Monitoramento de Indicadores STI", "Editais e Chamadas de Fomento"] 
+            },
+            { 
+                nome: "Gabrielly Tavares Lopes", cargo: "Analista STI", area: "GTI", email: "gabriellylopes@fieg.com.br", foto: "https://i.postimg.cc/G2XF3QX0/Gabrielly.jpg",
+                resumo: "Especialista em estruturação de STI nas unidades, lidera a execução do programa SEBRAETEC e a implantação de novos sistemas de inovação.",
+                atividades: ["Programa SEBRAETEC", "Estruturação de STI nas Unidades", "Escrita de Projetos de Inovação", "Gestão de Projetos LCC"] 
+            },
+            { 
+                nome: "Geovana Pereira", cargo: "Analista III", area: "GTI", email: "geovanapereira@fieg.com.br", whatsapp: "(62) 98169-1385", foto: "https://i.postimg.cc/8cg2Z3dH/Geovana_Pereira.png",
+                resumo: "Gestora do SENAI HUB Goiás, atua na conexão do SENAI com startups e parceiros ICTs através do programa Conecta Mais Indústria.",
+                atividades: ["Interlocutora SENAI HUB", "Programa Conecta Mais Indústria", "Ecossistema de Inovação Goiano", "Marketing de STI"] 
+            },
+            { 
+                nome: "Guilherme Alves", cargo: "Analista III", area: "GTI", email: "guilhermealves.senai@fieg.com.br", whatsapp: "(62) 99272-1230", foto: "https://i.postimg.cc/s2tq28NT/Guilherme_Alves.png",
+                resumo: "Responsável pela gestão de processos e inteligência do sistema SGT, coordenando os editais regionais de inovação para micro e pequenas empresas.",
+                atividades: ["Gestão do Sistema SGT", "Edital Regional SEBRAE/SENAI", "Monitoramento de Indicadores de Produção", "Capacitação Técnica GTI"] 
+            },
+            { 
+                nome: "Vanessa Maria", cargo: "Analista II", area: "GTI", email: "vanessamaria@fieg.com.br", whatsapp: "(62) 99354-2286", foto: "https://i.postimg.cc/fkngz0qK/Vanessa_Maria.png",
+                resumo: "Analista de comunicação focada na estratégia digital de inovação, responsável pelo monitoramento e ativação da marca SENAI HUB e redes sociais de STI.",
+                atividades: ["Marketing e Comunicação STI", "Redes Sociais do SENAI HUB", "Criação de Conteúdo Estratégico", "Ativação de Marca"] 
+            },
+            { 
+                nome: "David Daniel", cargo: "Estagiário", area: "GTI", email: "daviddaniel@fieg.com.br", whatsapp: "(62) 99614-3664", foto: "https://i.postimg.cc/t4414m00/David_Daniel.jpg",
+                resumo: "Apoia o desenvolvimento de inteligência de negócios através de dashboards para o monitoramento do programa Brasil Mais Produtivo e indicadores de STI.",
+                atividades: ["Desenvolvimento de Dashboards BI", "Monitoramento Brasil Mais Produtivo", "Painéis de Informações Estratégicas"] 
+            },
+            { 
+                nome: "Beatriz Martins", cargo: "Analista III - Advogada", area: "GTI", email: "beatrizmartins@fieg.com.br", whatsapp: "(62) 99456-2504", foto: "https://i.postimg.cc/QMMcvdN0/Beatriz_Martins.png",
+                resumo: "Advogada especializada em inovação, lidera a estruturação do Núcleo de Inovação Tecnológica (NIT) e a proteção de patentes e marcas do SENAI Goiás.",
+                atividades: ["Estruturação do NIT", "Propriedade Intelectual e Patentes", "Pareceres Jurídicos em Inovação", "Gestão de Contratos e Convênios"] 
+            },
+            // --- COPE ---
+            { 
+                nome: "Quissínia", nickname: "Professora Quissínia", cargo: "Coordenadora de Projetos Estratégicos", area: "COPE", email: "quissinia.sesi@fieg.com.br", whatsapp: "(62) 98405-4323", foto: "https://i.postimg.cc/JhkDJDpr/Quissínia.png",
+                resumo: "Lidera os projetos de expansão do SESI em parcerias governamentais, focando na gestão compartilhada de escolas municipais e novos modelos educacionais.",
+                atividades: ["Gestão de Escolas Municipais (GEM)", "Projetos com Prefeituras", "Coordenação de Projetos Estratégicos"] 
+            },
+            { 
+                nome: "Diogo Faria", cargo: "Analista de Educação", area: "COPE", email: "diogofaria@fieg.com.br", whatsapp: "(62) 99640-7589", foto: "https://i.postimg.cc/gkYjgB25/Diogo_Faria.png",
+                resumo: "Analista pedagógico focado em programas de formação docente de alto impacto, como o Trainee for Education, e assessoria técnica às escolas parceiras.",
+                atividades: ["Trainee for Education", "Programa Conectando Futuros", "Assessoria Pedagógica GEM", "Gestão de Riscos Educacionais"] 
+            },
+            { 
+                nome: "Daianne Silva", cargo: "Assistente Administrativo", area: "COPE", email: "daiannerocha@fieg.com.br", whatsapp: "(62) 3219-1393", foto: "https://i.postimg.cc/BbfLZS3w/Daianne_Silva.png",
+                resumo: "Fornece suporte logístico e administrativo para a coordenação de projetos estratégicos, gerenciando fluxos de compras, orçamentos e relatórios financeiros.",
+                atividades: ["Processos de Compras e Orçamentos", "Relatórios Financeiros Mensais", "Apoio administrativo às Unidades Parceiras"] 
+            },
+            // --- CRTI ---
+            { 
+                nome: "Pedro Henrique", cargo: "Coordenador de Recursos Tecnológicos e Inteligência Educacional", area: "CRTI", email: "pedrohcn.senai@fieg.com.br", whatsapp: "(62) 99867-0109", foto: "https://i.postimg.cc/FR0StdSq/Pedro.png",
+                resumo: "Coordena a inteligência de dados e a infraestrutura tecnológica do SESI SENAI, liderando projetos de IA na educação e a biblioteca figital.",
+                atividades: ["Coordenação Tecnológica e de IA", "Produção de Dados e Estatísticas", "Projeto Biblioteca Figital", "Padronização de Laboratórios"] 
+            },
+            { 
+                nome: "Antonio Balduino Neto", cargo: "Analista de Inteligência de Dados", area: "CRTI", email: "antoniobsn.senai@fieg.com.br", whatsapp: "(62) 98186-3320", foto: "https://i.postimg.cc/mrdyrF64/Antonio_Neto.png",
+                resumo: "Especialista em inteligência artificial e foresights estratégicos, desenvolve assistentes de IA e dashboards de monitoramento de OKRs para a diretoria.",
+                atividades: ["Criação de Agentes e Assistentes de IA", "Estudos Prospectivos (Foresight)", "Monitoramento de KPIs e Metas", "Inteligência de Mercado"] 
+            },
+            { 
+                nome: "A contratar", cargo: "Analista de Projetos", area: "CRTI", email: "", whatsapp: "", foto: "",
+                resumo: "Posição estratégica voltada ao acompanhamento de projetos de infraestrutura do DN e DR, incluindo construções, reformas e padronização de mobiliários.",
+                atividades: ["Escolas SESI de Referência", "SGF - Apoio Financeiro", "Padronização de Mobiliário e Equipamentos", "Gestão Fiscal de Projetos"] 
+            },
+            { 
+                nome: "Fabiano Caruso", cargo: "Analista III", area: "CRTI", email: "fabianosousa.sesi@fieg.com.br", whatsapp: "(48) 99135-1121", foto: "https://i.postimg.cc/T3kXTtGy/Fabiano_Caruso.png",
+                resumo: "Lidera as Redes de Bibliotecas Figitais do SESI e SENAI, integrando ecossistemas bibliográficos escolares e universitários em uma plataforma colaborativa.",
+                atividades: ["Gestão de Bibliotecas Figitais", "Planejamento Estratégico de Redes", "Ecossistemas Bibliográficos", "Desenvolvimento de Equipes"] 
+            },
+            { 
+                nome: "Gideon Gomes", cargo: "Assessor Técnico Educacional", area: "CRTI", email: "gideongomes.senai@fieg.com.br", whatsapp: "(62) 98535-8275", foto: "https://i.postimg.cc/7ZZptSzs/Gideon_Gomes.png",
+                resumo: "Assessor de infraestrutura focado na transformação digital via programa SENAI.Digital, orientando unidades na modernização de laboratórios e licitações.",
+                atividades: ["Programa SENAI.Digital", "Infraestrutura Educacional Física e Digital", "Apoio em Processos Licitatórios", "Padronização de Laboratórios"] 
+            },
+            { 
+                nome: "Pierre Marcos", cargo: "Analista de Educação", area: "CRTI", email: "pierre.senai@fieg.com.br", whatsapp: "(62) 99223-4481", foto: "https://i.postimg.cc/SNSM5KKy/Pierre_Marcos.png",
+                resumo: "Foca na implementação de metodologias Lean e Indústria 4.0 nos ambientes de aprendizagem, gerenciando o SENAI Lab e ações de segurança digital.",
+                atividades: ["Programa SENAI 4.0 e SENAI Lab", "Lean Office e Lean Educacional", "Segurança Digital", "Recursos Didáticos Inovadores"] 
+            },
+            // --- CMOV ---
+            { 
+                nome: "Paolo Rodrigues", cargo: "Coordenador das Unidades Móveis", area: "CMOV", email: "paolorodrigues@fieg.com.br", whatsapp: "(62) 99988-6546", foto: "https://i.postimg.cc/2SXhnfrr/Paolo.png",
+                resumo: "Coordenador das unidades móveis de educação, responsável por expandir a capilaridade dos cursos do SENAI no interior através de carretas tecnológicas.",
+                atividades: ["Gestão de Unidades Móveis e Carretas", "Projeto de Interiorização da Educação", "Expansão da Capilaridade Profissional", "Gestão Técnica e Operacional"] 
+            }
         ];
 
-        // --- 3. LÓGICA DE FUNÇÕES (HOISTING GARANTIDO) ---
+        // =========================================================
+        // 2. CONFIGURAÇÕES DE HIERARQUIA E DESIGN
+        // =========================================================
+        const CONFIG_FILTROS = [
+            { id: "TODOS", label: "Tudo", color: "bg-slate-100 text-slate-600 ring-slate-200" },
+            { id: "DET", label: "DET", desc: "Diretoria", color: "bg-blue-100 text-blue-700 ring-blue-200", border: "bg-blue-800" },
+            { id: "GEB", label: "GEB", desc: "Básica", color: "bg-emerald-100 text-emerald-700 ring-emerald-200", border: "bg-emerald-500" },
+            { id: "GEP", label: "GEP", desc: "Profissional", color: "bg-purple-100 text-purple-700 ring-purple-200", border: "bg-purple-500" },
+            { id: "GTI", label: "GTI", desc: "Tecnologia", color: "bg-amber-100 text-amber-700 ring-amber-200", border: "bg-amber-500" },
+            { id: "CRTI", label: "CRTI", desc: "Inteligência", color: "bg-cyan-100 text-cyan-700 ring-cyan-200", border: "bg-cyan-500" },
+            { id: "COPE", label: "COPE", desc: "Estratégico", color: "bg-rose-100 text-rose-700 ring-rose-200", border: "bg-rose-500" },
+            { id: "CMOV", label: "CMOV", desc: "Móveis", color: "bg-orange-100 text-orange-700 ring-orange-200", border: "bg-orange-500" }
+        ];
 
-        function normalize(text) {
-            return text ? text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "";
-        }
+        // =========================================================
+        // 3. COMPONENTES DE INTERFACE
+        // =========================================================
 
-        function formatActivitiesToHtml(activitiesArray) {
-            if (!activitiesArray || activitiesArray.length === 0) return "";
-            const items = activitiesArray.map(act => `<li>${act}</li>`).join('');
-            return `<ul class="detail-list">${items}</ul>`;
-        }
+        const normalizeText = (text) => 
+            text ? text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : "";
 
-        function cleanNaturalQuery(query) {
-            const prefixes = [
-                /^quem e o responsavel por /, /^quem cuida de /, /^quem e o ponto focal para /,
-                /^quem e responsavel pela /, /^quem e responsavel pelo /, /^qual o contato de /
-            ];
-            let cleaned = normalize(query).trim();
-            for (const p of prefixes) { cleaned = cleaned.replace(p, ''); }
-            return cleaned.trim();
-        }
+        const getIniciais = (nome) => {
+            const parts = nome.trim().split(/\s+/);
+            if (parts.length === 1) return parts[0][0].toUpperCase();
+            return (parts[0][0] + (parts[parts.length - 1][0] || '')).toUpperCase();
+        };
 
-        function renderResults(list) {
-            const container = document.getElementById('results-container');
-            const title = document.getElementById('results-title');
-            container.innerHTML = '';
+        const IconUser = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>;
+        const IconSearch = ({ size = 20, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>;
+        const IconMail = ({ size = 16 }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>;
+        const IconWhatsApp = ({ size = 16 }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-14h.1c4.37 0 7.9 3.53 7.9 7.9c0 .77-.13 1.52-.4 2.3"/><path d="M17.3 10.3c-.2-.4-.5-.5-.9-.5h-.3c-.3 0-.7.2-.9.5l-1.3 1.9c-.1.2 0 .4.1.5l.9.9c.1.1.1.3 0 .4l-2.1 2.1c-.1.1-.3.1-.4 0l-.9-.9c-.1-.1-.3-.2-.5-.1l-1.9 1.3c-.3.2-.5.5-.5.9v.3c0 .4.1.7.5.9l.4.2c1.8.8 3.8.8 5.6 0l.4-.2c.4-.2.5-.5.5-.9v-.3c0-.4-.1-.7-.5-.9l-1.3-1.9"/></svg>;
+        const IconX = ({ size = 24 }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
 
-            if (list.length === 0) {
-                title.textContent = "Nenhum profissional encontrado";
-                container.innerHTML = `<div class="col-span-full text-center py-20 text-slate-400 font-medium">Use a busca acima ou selecione uma área.</div>`;
-                return;
+        const Avatar = ({ person, size = "md" }) => {
+            const [error, setError] = useState(false);
+            const dimensions = size === "lg" ? "w-32 h-32 text-4xl" : "w-16 h-16 text-xl";
+            
+            if (person.foto && !error) {
+                return (
+                    <img 
+                        src={person.foto} 
+                        alt={person.nome} 
+                        onError={() => setError(true)}
+                        className={`${dimensions.split(' ')[0]} ${dimensions.split(' ')[1]} rounded-[2rem] object-cover shadow-inner border-4 border-white`}
+                    />
+                );
             }
+            
+            return (
+                <div className={`${dimensions} rounded-[1.5rem] bg-gradient-to-br from-blue-500 to-blue-700 text-white font-black flex items-center justify-center shadow-lg border-4 border-white`}>
+                    {getIniciais(person.nome)}
+                </div>
+            );
+        };
 
-            title.textContent = `Profissionais Encontrados (${list.length})`;
-
-            list.forEach(c => {
-                const card = document.createElement('div');
-                card.className = "contact-card bg-white rounded-[2rem] p-6 shadow-sm border border-slate-100 flex flex-col";
-                card.innerHTML = `
-                    <div class="flex items-start gap-4 mb-6">
-                        <div class="profile-image-container flex-shrink-0">
-                            <img src="${c.image_url}" alt="${c.nome}" onerror="this.src='https://placehold.co/80x80?text=${c.nome.charAt(0)}'">
+        const ActivityModal = ({ isOpen, person, onClose }) => {
+            if (!isOpen || !person) return null;
+            const config = CONFIG_FILTROS.find(f => f.id === person.area) || CONFIG_FILTROS[0];
+            
+            return (
+                <div className="fixed inset-0 z-[100] flex items-center justify-end md:justify-center p-0 md:p-4 bg-slate-900/60 backdrop-blur-sm transition-all overflow-hidden" onClick={onClose}>
+                    <div className="bg-white w-full md:max-w-2xl h-full md:h-auto md:max-h-[90vh] md:rounded-[3rem] shadow-2xl flex flex-col overflow-hidden modal-enter-active" onClick={e => e.stopPropagation()}>
+                        <div className={`p-10 text-white relative ${config.border}`}>
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-20 -mt-20 blur-3xl"></div>
+                            <div className="flex flex-col md:flex-row gap-8 items-center relative z-10">
+                                <Avatar person={person} size="lg" />
+                                <div className="text-center md:text-left">
+                                    <span className="text-white/60 text-[10px] font-black tracking-widest uppercase bg-black/10 px-3 py-1.5 rounded-full mb-3 inline-block">Área: {person.area}</span>
+                                    <h2 className="text-4xl font-black leading-tight tracking-tighter">{person.nome}</h2>
+                                    <p className="text-white/80 text-lg font-medium mt-1">{person.cargo}</p>
+                                </div>
+                                <button onClick={onClose} className="absolute top-4 right-4 p-3 bg-white/10 hover:bg-white/25 rounded-full transition-all active:scale-90"><IconX /></button>
+                            </div>
                         </div>
-                        <div class="min-w-0 flex-1">
-                            <h3 class="text-xl font-bold text-slate-900 truncate">${c.nome}</h3>
-                            <p class="text-xs font-extrabold text-blue-600 uppercase tracking-tighter mb-1">${c.cargo}</p>
-                            <p class="text-[10px] font-bold text-slate-400">${MANAGEMENT_AREA_MAP[c.area]}</p>
+                        <div className="p-10 overflow-y-auto flex-grow space-y-12 no-scrollbar">
+                            <section>
+                                <h3 className="text-slate-400 text-[10px] font-black uppercase tracking-[0.3em] mb-4">Resumo Executivo</h3>
+                                <div className="bg-slate-50 p-8 rounded-[2.5rem] border-l-8 border-blue-600 shadow-sm relative italic text-slate-700 text-xl leading-relaxed font-medium">
+                                    "{person.resumo}"
+                                </div>
+                            </section>
+                            <section>
+                                <h3 className="text-slate-400 text-[10px] font-black uppercase tracking-[0.3em] mb-4">Principais Entregas</h3>
+                                <div className="grid gap-4">
+                                    {person.atividades.map((task, i) => (
+                                        <div key={i} className="flex items-center gap-6 bg-white p-5 rounded-2xl border border-slate-100 hover:border-blue-400 hover:shadow-md transition-all group">
+                                            <div className="h-3 w-3 rounded-full bg-blue-600 group-hover:scale-150 transition-transform shrink-0"></div>
+                                            <span className="text-slate-700 font-bold text-base">{task}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        </div>
+                        <div className="p-8 border-t border-slate-100 flex gap-4 bg-slate-50/50">
+                            {person.email && <a href={`mailto:${person.email}`} className="flex-1 bg-white border-2 border-slate-200 text-slate-700 py-5 rounded-[1.5rem] font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-slate-50 transition-all">E-mail</a>}
+                            {person.whatsapp && (
+                                <a href={`https://wa.me/${person.whatsapp.replace(/\D/g,'')}`} target="_blank" className="flex-1 bg-green-500 text-white py-5 rounded-[1.5rem] font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-green-600 transition-all shadow-xl shadow-green-200">WhatsApp</a>
+                            )}
                         </div>
                     </div>
+                </div>
+            );
+        };
+
+        const App = () => {
+            const [searchTerm, setSearchTerm] = useState("");
+            const [filterArea, setFilterArea] = useState("TODOS");
+            const [selectedPerson, setSelectedPerson] = useState(null);
+
+            const filteredData = useMemo(() => {
+                const searchNorm = normalizeText(searchTerm);
+                return LISTA_COLABORADORES.filter(person => {
+                    const config = CONFIG_FILTROS.find(f => f.id === person.area);
+                    const searchableContent = [
+                        person.nome, person.nickname || "", person.cargo, person.area,
+                        person.resumo,
+                        config?.desc || "",
+                        ...(person.atividades || [])
+                    ].map(normalizeText).join(" ");
                     
-                    <div class="flex-1 space-y-4">
-                        <div>
-                            <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest block mb-1">Resumo</span>
-                            <p class="text-sm text-slate-600 leading-snug">${c.resumo}</p>
-                        </div>
-                    </div>
-
-                    <button onclick="toggleCardDetails('${c.id}', this)" class="detail-button w-full mt-6 py-3 rounded-2xl text-xs font-bold uppercase tracking-wider">
-                        Ver Detalhes
-                    </button>
-
-                    <div id="details-${c.id}" class="hidden mt-4 pt-4 border-t border-slate-50 animate-fade-in">
-                        <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest block mb-2">Atividades Detalhadas</span>
-                        ${formatActivitiesToHtml(c.atividades)}
-                    </div>
-
-                    <div class="mt-6 pt-4 border-t border-slate-50 space-y-2">
-                        <a href="mailto:${c.email}" class="flex items-center text-sm text-slate-500 hover:text-blue-600 transition-colors">
-                            <svg class="w-4 h-4 mr-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 001.22 0L21 8m-2 4v7a2 2 0 01-2 2H7a2 2 0 01-2-2v-7"></path></svg>
-                            <span class="truncate">${c.email || 'N/A'}</span>
-                        </a>
-                        <div class="flex items-center text-sm text-slate-500">
-                            <svg class="w-4 h-4 mr-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-11a2 2 0 01-2-2v-3.28z"></path></svg>
-                            <span>${c.telefone || 'N/A'}</span>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function toggleCardDetails(id, btn) {
-            const div = document.getElementById(`details-${id}`);
-            const isHidden = div.classList.contains('hidden');
-            div.classList.toggle('hidden');
-            btn.textContent = isHidden ? "Ocultar Detalhes" : "Ver Detalhes";
-        }
-
-        function filterContacts(query = '') {
-            const term = cleanNaturalQuery(query);
-            let results = contacts;
-
-            if (term.length > 0) {
-                activeFilter = null;
-                document.querySelectorAll('.filter-button').forEach(b => b.classList.remove('active'));
-                document.getElementById('filter-badge').classList.add('hidden');
-                
-                results = contacts.filter(c => {
-                    const searchable = `${c.nome} ${c.cargo} ${c.palavras} ${c.area} ${c.atividades.join(' ')}`;
-                    return normalize(searchable).includes(term);
+                    const matchesSearch = searchableContent.includes(searchNorm);
+                    const matchesFilter = filterArea === "TODOS" || person.area === filterArea;
+                    return matchesSearch && matchesFilter;
                 });
-            } else if (activeFilter) {
-                results = contacts.filter(c => c.area === activeFilter);
-            } else {
-                results = [];
-            }
+            }, [searchTerm, filterArea]);
 
-            // Ordenação Hierárquica
-            results.sort((a, b) => {
-                const getRank = (cargo) => {
-                    const key = Object.keys(HIERARCHY_MAP).find(k => cargo.includes(k));
-                    return HIERARCHY_MAP[key] || 99;
-                };
-                const rankA = getRank(a.cargo);
-                const rankB = getRank(b.cargo);
-                if (rankA !== rankB) return rankA - rankB;
-                return a.nome.localeCompare(b.nome);
-            });
+            return (
+                <div className="min-h-screen">
+                    {/* Header bar compacta */}
+                    <div className="bg-[#002e5a] text-white py-3 border-b border-white/10 relative z-30">
+                        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+                             <h1 className="text-xl md:text-2xl font-black tracking-tight uppercase">Quem é Quem - <span className="text-blue-300">DET</span></h1>
+                             <img 
+                                src="https://i.postimg.cc/SNGfkpnN/DET_-_branco.png" 
+                                alt="Logo DET" 
+                                className="h-8 md:h-10 w-auto opacity-100"
+                            />
+                        </div>
+                    </div>
 
-            renderResults(results);
-        }
+                    {/* Bloco Superior Unificado (Header principal + Search) */}
+                    <header className="header-gradient text-white shadow-2xl relative overflow-hidden pt-12 pb-24">
+                        <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-white/5 rounded-full -mr-40 -mt-40 blur-[100px]"></div>
+                        
+                        <div className="max-w-7xl mx-auto px-8 relative z-10">
+                            <div className="max-w-3xl mb-12">
+                                <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-tight uppercase mb-4">Equipe de Educação <br/>e Tecnologia</h2>
+                                <p className="text-blue-100 text-lg font-medium opacity-80 leading-relaxed">Painel inteligente de competências e gestão de talentos do SESI SENAI Goiás.</p>
+                            </div>
 
-        function applyFilter(sigla, btn) {
-            activeFilter = sigla;
-            document.querySelectorAll('.filter-button').forEach(b => b.classList.remove('active'));
-            if(btn) btn.classList.add('active');
-            
-            const badge = document.getElementById('filter-badge');
-            badge.textContent = MANAGEMENT_AREA_MAP[sigla];
-            badge.classList.remove('hidden');
-            
-            document.getElementById('search-input').value = '';
-            filterContacts('');
-        }
+                            {/* Search Dock Integrado */}
+                            <div className="glass rounded-[2.5rem] shadow-2xl p-4 md:p-6 border border-white/20 max-w-5xl">
+                                <div className="flex flex-col gap-8">
+                                    <div className="relative group">
+                                        <IconSearch size={24} className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-all" />
+                                        <input 
+                                            type="text" 
+                                            placeholder="Busque por competências, cargos, nomes ou áreas..."
+                                            className="w-full pl-16 pr-6 py-5 bg-white text-slate-900 border-2 border-slate-100 rounded-[2rem] focus:ring-8 focus:ring-blue-100 focus:border-blue-500 outline-none transition-all text-lg font-semibold shadow-inner"
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
 
-        function renderManagementButtons() {
-            const container = document.getElementById('management-buttons-container');
-            Object.entries(MANAGEMENT_AREA_MAP).forEach(([sigla, nome]) => {
-                const btn = document.createElement('button');
-                btn.className = "filter-button text-white px-5 py-2.5 rounded-2xl text-sm font-bold shadow-md hover:scale-105 active:scale-95";
-                btn.textContent = sigla;
-                btn.title = nome;
-                btn.onclick = () => applyFilter(sigla, btn);
-                container.appendChild(btn);
-            });
-        }
+                    {/* Filtros Hierárquicos */}
+                    <div className="max-w-7xl mx-auto px-8 -mt-8 relative z-20 overflow-x-auto no-scrollbar">
+                        <div className="flex flex-nowrap md:flex-wrap gap-3 justify-start md:justify-center pb-4">
+                            {CONFIG_FILTROS.map(f => (
+                                <button 
+                                    key={f.id}
+                                    onClick={() => setFilterArea(f.id)}
+                                    className={`group relative flex flex-col items-center justify-center p-4 min-w-[120px] rounded-[1.8rem] transition-all border-2 active:scale-95 shadow-lg ${filterArea === f.id ? `${f.color} border-current -translate-y-2` : 'bg-white border-slate-100 text-slate-400 hover:border-blue-300 hover:text-blue-700 hover:scale-105'}`}
+                                >
+                                    <span className="text-lg font-black">{f.label}</span>
+                                    {f.desc && <span className="text-[9px] font-black uppercase opacity-60 mt-1 tracking-widest">{f.desc}</span>}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
 
-        // --- 4. INICIALIZAÇÃO ---
-        document.addEventListener('DOMContentLoaded', () => {
-            renderManagementButtons();
-            // Inicia exibindo a Diretoria (DET) por padrão
-            const firstBtn = document.querySelector('.filter-button');
-            applyFilter('DET', firstBtn);
-        });
+                    {/* Main Content Area */}
+                    <main className="max-w-7xl mx-auto px-8 mt-16 mb-32">
+                        <div className="mb-10 flex justify-between items-center">
+                            <h2 className="text-2xl font-black text-slate-800 tracking-tight">Talentos <span className="text-blue-600">{filterArea === "TODOS" ? "da Diretoria" : filterArea}</span></h2>
+                            <p className="bg-white px-5 py-1.5 rounded-full border border-slate-100 shadow-sm text-slate-500 font-bold text-xs">Total: {filteredData.length} registros</p>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+                            {filteredData.map((person, idx) => {
+                                const config = CONFIG_FILTROS.find(f => f.id === person.area) || CONFIG_FILTROS[0];
+                                return (
+                                    <div key={idx} className="bg-white rounded-[3rem] overflow-hidden border border-slate-100 shadow-xl shadow-slate-200/40 card-transition flex flex-col h-full group">
+                                        <div className={`h-4 ${config.border}`}></div>
+                                        <div className="p-10 flex-grow">
+                                            <div className="flex justify-between items-start mb-8">
+                                                <Avatar person={person} />
+                                                <span className={`text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-tighter transition-all ${filterArea === person.area ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-500'}`}>{person.area}</span>
+                                            </div>
+                                            <h3 className="text-2xl font-black text-slate-800 leading-[1.1] mb-3 group-hover:text-blue-800 transition-colors line-clamp-2">{person.nome}</h3>
+                                            <p className="text-xs text-slate-400 font-bold mb-8 leading-snug line-clamp-2 min-h-[2rem]">{person.cargo}</p>
+                                            <button 
+                                                onClick={() => setSelectedPerson(person)}
+                                                className="w-full py-5 bg-slate-900 text-white rounded-[1.5rem] font-black text-[10px] uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:bg-blue-800 transition-all shadow-lg active:scale-95"
+                                            >
+                                                Ver Perfil
+                                            </button>
+                                        </div>
+                                        <div className="px-10 pb-8 flex gap-8 justify-center pt-6 border-t border-slate-50">
+                                            {person.email && <a href={`mailto:${person.email}`} className="text-slate-300 hover:text-blue-600 hover:scale-125 transition-all"><IconMail size={22} /></a>}
+                                            {person.whatsapp && <a href={`https://wa.me/${person.whatsapp.replace(/\D/g,'')}`} target="_blank" className="text-slate-300 hover:text-green-500 hover:scale-125 transition-all"><IconWhatsApp size={22} /></a>}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        {filteredData.length === 0 && (
+                            <div className="text-center py-40 bg-slate-50 rounded-[5rem] border-4 border-dashed border-slate-200">
+                                <p className="text-slate-400 text-3xl font-black uppercase tracking-widest italic">Nenhum talento encontrado</p>
+                                <button onClick={() => setSearchTerm("")} className="mt-8 text-blue-600 font-black text-xl hover:underline underline-offset-[12px]">Redefinir Filtros</button>
+                            </div>
+                        )}
+                    </main>
 
+                    <ActivityModal isOpen={!!selectedPerson} person={selectedPerson} onClose={() => setSelectedPerson(null)} />
+                    
+                    <footer className="bg-slate-900 text-white py-16">
+                        <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-10 opacity-60">
+                            <div className="text-center md:text-left">
+                                <div className="text-xl font-black tracking-tighter mb-2 italic">SESI <span className="text-red-500">SENAI</span> GO</div>
+                                <p className="text-[10px] font-bold uppercase tracking-widest">Diretoria de Educação e Tecnologia • Dezembro 2025</p>
+                            </div>
+                            <p className="text-[10px] font-medium max-w-sm text-center md:text-right leading-relaxed italic">Aplicação estrutural para gestão de informações. Layout protegido contra alterações de design durante atualizações de dados.</p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
     </script>
 </body>
 </html>
